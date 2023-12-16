@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import {
   Checkbox,
   CheckboxGroup,
@@ -7,71 +9,191 @@ import {
   FormLabel,
   SimpleGrid,
   Container,
-  Heading
+  Heading,
 } from "@chakra-ui/react";
 
+import { LiturgicalColors, romcal } from 'romcal';
+
 export default function Checklist() {
+  const [isScarfOffering, setIsScarfOffering] = useState(false);
+  const [isSunday, setIsSunday] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [liturgyData, setLiturgyData] = useState<any>(null);
+  const [liturgicalSeason, setLiturgicalSeason] = useState<string>('');
+
+  const formatDate = (date: Date) => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return date.toLocaleDateString("en-US", options);
+  };
+  
+
+
+  // useEffect(() => {
+  //   const fetchLiturgyData = async () => {
+  //     try {
+  //       const response = await fetch('https://liturgy.day/api/day/2023-04-12', {
+  //         method: 'GET',
+  //         headers: { 'Accept': 'application/json' }
+  //       });
+
+  //       if (!response.ok) {
+  //         throw new Error('Failed to fetch data');
+  //       }
+
+  //       const data = await response.json();
+  //       setLiturgyData(data);
+
+  //       const season = data.season || '';
+  //       setLiturgicalSeason(season.toLowerCase());
+  //       setLiturgyData(data);
+  //     } catch (error) {
+  //       console.error('Error fetching liturgy data:', error);
+  //     }
+  //   };
+
+  //   fetchLiturgyData();
+  // }, []); 
+
+  useEffect(() => {
+    const fetchLiturgyData = async () => {
+      try {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+        const day = currentDate.getDate().toString().padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
+
+        const response = await fetch(`https://liturgy.day/api/day/${formattedDate}`, {
+          method: 'GET',
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const data = await response.json();
+        setLiturgyData(data);
+
+        const season = data.season || '';
+        setLiturgicalSeason(season.toLowerCase());
+      } catch (error) {
+        console.error('Error fetching liturgy data:', error);
+      }
+    };
+
+    fetchLiturgyData();
+  }, []);
+
+  const getColorScheme = () => {
+    switch (liturgicalSeason) {
+      case 'advent':
+        return 'purple';
+      case 'christmas':
+        return 'gray';
+      case 'lent':
+        return 'purple';
+      case 'easter':
+        return 'gray';
+      case 'ordinary time':
+        return 'green';
+      default:
+        return 'red'; // Default color scheme if liturgical season is not specified
+    }
+  };
+  
   return (
-    <Container maxW={'7xl'}>
+    <Container maxW={"7xl"}>
+      <Heading as="h2" size="xl" mb={4}>
+        {formatDate(currentDate)}
+      </Heading>
+      {liturgyData && (
+        <div>
+          <Heading as='h2' size='xl' mb={4}>Liturgy Data</Heading>
+          <pre>{JSON.stringify(liturgyData, null, 2)}</pre>
+        </div>
+      )}
       <FormControl>
         <FormLabel htmlFor="isSunday">Sunday Mass:</FormLabel>
-        <Switch id="isSunday" />
+        <Switch id="isSunday" onChange={() => setIsSunday(!isSunday)} colorScheme={getColorScheme()}/>
         <FormLabel htmlFor="scarfOffering">Scarf Offering:</FormLabel>
-        <Switch id="scarfOffering" />
+        <Switch
+          id="scarfOffering"
+          onChange={() => setIsScarfOffering(!isScarfOffering)}
+          colorScheme={getColorScheme()}
+        />
       </FormControl>
 
-      <Container maxW={'6xl'} mt={12} as={SimpleGrid} columns={{ base: 2, lg: 4 }}>
-      <CheckboxGroup colorScheme="red">
-        <Stack pl={6} mt={1} spacing={1}>
-        <Heading as='h3' size='lg'>People</Heading>
-          <Checkbox value="lector">Lector</Checkbox>
-          <Checkbox value="altar-servers">Altar Servers</Checkbox>
-          <Checkbox value="extraordinary-ministers">
-            Extraordinary Ministers of Holy Communion
-          </Checkbox>
-        </Stack>
-      </CheckboxGroup>
-
-      <CheckboxGroup colorScheme="blue">
-        <Stack pl={6} mt={1} spacing={1}>
-        <Heading as='h3' size='lg'>Liturgical Books</Heading>
-          <Checkbox value="lectionary">Lectionary</Checkbox>
-          <Checkbox value="roman-missal">Roman Missal</Checkbox>
-          <Checkbox value="lectionary-cover">Lectionary Cover</Checkbox>
-          <Checkbox value="roman-missal-cover">Roman Missal Cover</Checkbox>
-        </Stack>
+      <Container
+        maxW={"6xl"}
+        mt={12}
+        as={SimpleGrid}
+        columns={{ base: 2, lg: 4 }}
+      >
+        <CheckboxGroup colorScheme={getColorScheme()}>
+          <Stack pl={6} mt={1} spacing={1}>
+            <Heading as="h3" size="lg">
+              People
+            </Heading>
+            <Checkbox value="lector">Lector</Checkbox>
+            <Checkbox value="altar-servers">Altar Servers</Checkbox>
+            <Checkbox value="extraordinary-ministers">
+              Extraordinary Ministers of Holy Communion
+            </Checkbox>
+          </Stack>
         </CheckboxGroup>
-      
-      <CheckboxGroup colorScheme="green">
-        <Stack pl={6} mt={1} spacing={1}>
-        <Heading as='h3' size='lg'>Vessels</Heading>
-          <Checkbox value="chalice">Chalice</Checkbox>
-          <Checkbox value="paten">Paten</Checkbox>
-          <Checkbox value="ciborium">Ciborium</Checkbox>
-          <Checkbox value="purificator">Purificator</Checkbox>
-          <Checkbox value="corporal">Corporal</Checkbox>
-          <Checkbox value="lavabo">Lavabo</Checkbox>
-          <Checkbox value="altar-cloth">Altar Cloth</Checkbox>
-          <Checkbox value="cruets">Cruets</Checkbox>
-        </Stack>
-      </CheckboxGroup>
 
-      <CheckboxGroup colorScheme="purple">
-        <Stack pl={6} mt={1} spacing={1}>
-        <Heading as='h3' size='lg'>Scarf Offering</Heading>
-          <Checkbox value="an-khan">Au Nhi Scarf</Checkbox>
-          <Checkbox value="tn-khan">Thieu Nhi Scarf</Checkbox>
-          <Checkbox value="ns-khan">Nghia Si Scarf</Checkbox>
-          <Checkbox value="hs-khan">Hiep Si Scarf</Checkbox>
-          <Checkbox value="ht-khan">Huynh Truong Scarf</Checkbox>
-          <Checkbox value="hlv-khan">Huan Luyen Vien Scarf</Checkbox>
-          <Checkbox value="tt-khan">Tro Ta Scarf</Checkbox>
-          <Checkbox value="tro-uy-khan">Tro Uy Scarf</Checkbox>
-          <Checkbox value="tuyen-uy-khan">Tuyen Uy Scarf</Checkbox>
-          <Checkbox value="biretta">Biretta</Checkbox>
-          <Checkbox value="zuchetto">Zuchetto</Checkbox>
-        </Stack>
-      </CheckboxGroup>
+        <CheckboxGroup colorScheme={getColorScheme()}>
+          <Stack pl={6} mt={1} spacing={1}>
+            <Heading as="h3" size="lg">
+              Liturgical Books
+            </Heading>
+            <Checkbox value="lectionary">Lectionary</Checkbox>
+            <Checkbox value="roman-missal">Roman Missal</Checkbox>
+          </Stack>
+        </CheckboxGroup>
+
+        <CheckboxGroup colorScheme={getColorScheme()}>
+          <Stack pl={6} mt={1} spacing={1}>
+            <Heading as="h3" size="lg">
+              Vessels
+            </Heading>
+            <Checkbox value="chalice">Chalice</Checkbox>
+            <Checkbox value="paten">Paten</Checkbox>
+            <Checkbox value="ciborium">Ciborium</Checkbox>
+            <Checkbox value="purificator">Purificator</Checkbox>
+            <Checkbox value="corporal">Corporal</Checkbox>
+            <Checkbox value="lavabo">Lavabo</Checkbox>
+            <Checkbox value="altar-cloth">Altar Cloth</Checkbox>
+            <Checkbox value="cruets">Cruets</Checkbox>
+          </Stack>
+        </CheckboxGroup>
+
+        {isScarfOffering && (
+        <CheckboxGroup colorScheme={getColorScheme()}>
+            <Stack pl={6} mt={1} spacing={1}>
+              <Heading as="h3" size="lg">
+                Scarf Offering
+              </Heading>
+              <Checkbox value="an-khan">Au Nhi Scarf</Checkbox>
+              <Checkbox value="tn-khan">Thieu Nhi Scarf</Checkbox>
+              <Checkbox value="ns-khan">Nghia Si Scarf</Checkbox>
+              <Checkbox value="hs-khan">Hiep Si Scarf</Checkbox>
+              <Checkbox value="ht-khan">Huynh Truong Scarf</Checkbox>
+              <Checkbox value="hlv-khan">Huan Luyen Vien Scarf</Checkbox>
+              <Checkbox value="tt-khan">Tro Ta Scarf</Checkbox>
+              <Checkbox value="tro-uy-khan">Tro Uy Scarf</Checkbox>
+              <Checkbox value="tuyen-uy-khan">Tuyen Uy Scarf</Checkbox>
+              <Checkbox value="biretta">Biretta</Checkbox>
+              <Checkbox value="zuchetto">Zuchetto</Checkbox>
+            </Stack>
+          </CheckboxGroup>
+        )}
       </Container>
     </Container>
   );
