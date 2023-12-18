@@ -12,14 +12,14 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
-import { LiturgicalColors, romcal } from 'romcal';
+import fetchLiturgyData from "../utils/liturgyAPI";
 
 export default function Checklist() {
   const [isScarfOffering, setIsScarfOffering] = useState(false);
   const [isSunday, setIsSunday] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [liturgyData, setLiturgyData] = useState<any>(null);
-  const [liturgicalSeason, setLiturgicalSeason] = useState<string>('');
+  const [liturgicalSeason, setLiturgicalSeason] = useState<string>("");
 
   const formatDate = (date: Date) => {
     const options = {
@@ -30,83 +30,46 @@ export default function Checklist() {
     };
     return date.toLocaleDateString("en-US", options);
   };
-  
-
-
-  // useEffect(() => {
-  //   const fetchLiturgyData = async () => {
-  //     try {
-  //       const response = await fetch('https://liturgy.day/api/day/2023-04-12', {
-  //         method: 'GET',
-  //         headers: { 'Accept': 'application/json' }
-  //       });
-
-  //       if (!response.ok) {
-  //         throw new Error('Failed to fetch data');
-  //       }
-
-  //       const data = await response.json();
-  //       setLiturgyData(data);
-
-  //       const season = data.season || '';
-  //       setLiturgicalSeason(season.toLowerCase());
-  //       setLiturgyData(data);
-  //     } catch (error) {
-  //       console.error('Error fetching liturgy data:', error);
-  //     }
-  //   };
-
-  //   fetchLiturgyData();
-  // }, []); 
 
   useEffect(() => {
-    const fetchLiturgyData = async () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    const day = currentDate.getDate().toString().padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+
+    const fetchData = async () => {
       try {
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-        const day = currentDate.getDate().toString().padStart(2, '0');
-        const formattedDate = `${year}-${month}-${day}`;
-
-        const response = await fetch(`https://liturgy.day/api/day/${formattedDate}`, {
-          method: 'GET',
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-
-        const data = await response.json();
+        const data = await fetchLiturgyData(formattedDate);
         setLiturgyData(data);
 
-        const season = data.season || '';
+        const season = data.season || "";
         setLiturgicalSeason(season.toLowerCase());
       } catch (error) {
-        console.error('Error fetching liturgy data:', error);
+        console.error("Error fetching liturgy data:", error);
       }
     };
 
-    fetchLiturgyData();
+    fetchData();
   }, []);
 
   const getColorScheme = () => {
     switch (liturgicalSeason) {
-      case 'advent':
-        return 'purple';
-      case 'christmas':
-        return 'gray';
-      case 'lent':
-        return 'purple';
-      case 'easter':
-        return 'gray';
-      case 'ordinary time':
-        return 'green';
+      case "advent":
+        return "purple";
+      case "christmas":
+        return "gray";
+      case "lent":
+        return "purple";
+      case "easter":
+        return "gray";
+      case "ordinary time":
+        return "green";
       default:
-        return 'red'; // Default color scheme if liturgical season is not specified
+        return "red";
     }
   };
-  
+
   return (
     <Container maxW={"7xl"}>
       <Heading as="h2" size="xl" mb={4}>
@@ -114,13 +77,19 @@ export default function Checklist() {
       </Heading>
       {liturgyData && (
         <div>
-          <Heading as='h2' size='xl' mb={4}>Liturgy Data</Heading>
+          <Heading as="h2" size="xl" mb={4}>
+            Liturgy Data
+          </Heading>
           <pre>{JSON.stringify(liturgyData, null, 2)}</pre>
         </div>
       )}
       <FormControl>
         <FormLabel htmlFor="isSunday">Sunday Mass:</FormLabel>
-        <Switch id="isSunday" onChange={() => setIsSunday(!isSunday)} colorScheme={getColorScheme()}/>
+        <Switch
+          id="isSunday"
+          onChange={() => setIsSunday(!isSunday)}
+          colorScheme={getColorScheme()}
+        />
         <FormLabel htmlFor="scarfOffering">Scarf Offering:</FormLabel>
         <Switch
           id="scarfOffering"
@@ -175,7 +144,7 @@ export default function Checklist() {
         </CheckboxGroup>
 
         {isScarfOffering && (
-        <CheckboxGroup colorScheme={getColorScheme()}>
+          <CheckboxGroup colorScheme={getColorScheme()}>
             <Stack pl={6} mt={1} spacing={1}>
               <Heading as="h3" size="lg">
                 Scarf Offering
