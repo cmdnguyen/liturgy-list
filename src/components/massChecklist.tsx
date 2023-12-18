@@ -10,6 +10,7 @@ import {
   SimpleGrid,
   Container,
   Heading,
+  Button,
 } from "@chakra-ui/react";
 
 import fetchLiturgyData from "../utils/liturgyAPI";
@@ -20,6 +21,7 @@ export default function Checklist() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [liturgyData, setLiturgyData] = useState<any>(null);
   const [liturgicalSeason, setLiturgicalSeason] = useState<string>("");
+  const [checkedValues, setCheckedValues] = useState<string[]>([]);
 
   const formatDate = (date: Date) => {
     const options = {
@@ -70,26 +72,34 @@ export default function Checklist() {
     }
   };
 
+  const handleCheckboxChange = (values: string[]) => {
+    setCheckedValues(values);
+  };
+
+  const handleClearChecks = () => {
+    setCheckedValues([]);
+  };
+
   return (
     <Container maxW={"7xl"}>
       <Heading as="h2" size="xl" mb={4}>
         {formatDate(currentDate)}
       </Heading>
-      {liturgyData && (
+      {/* {liturgyData && (
         <div>
           <Heading as="h2" size="xl" mb={4}>
             Liturgy Data
           </Heading>
           <pre>{JSON.stringify(liturgyData, null, 2)}</pre>
         </div>
-      )}
+      )} */}
       <FormControl>
-        <FormLabel htmlFor="isSunday">Sunday Mass:</FormLabel>
+        {/* <FormLabel htmlFor="isSunday">Sunday Mass:</FormLabel>
         <Switch
           id="isSunday"
           onChange={() => setIsSunday(!isSunday)}
           colorScheme={getColorScheme()}
-        />
+        /> */}
         <FormLabel htmlFor="scarfOffering">Scarf Offering:</FormLabel>
         <Switch
           id="scarfOffering"
@@ -104,7 +114,11 @@ export default function Checklist() {
         as={SimpleGrid}
         columns={{ base: 2, lg: 4 }}
       >
-        <CheckboxGroup colorScheme={getColorScheme()}>
+        <CheckboxGroup
+          colorScheme={getColorScheme()}
+          onChange={handleCheckboxChange}
+          value={checkedValues}
+        >
           <Stack pl={6} mt={1} spacing={1}>
             <Heading as="h3" size="lg">
               People
@@ -117,7 +131,11 @@ export default function Checklist() {
           </Stack>
         </CheckboxGroup>
 
-        <CheckboxGroup colorScheme={getColorScheme()}>
+        <CheckboxGroup
+          colorScheme={getColorScheme()}
+          onChange={handleCheckboxChange}
+          value={checkedValues}
+        >
           <Stack pl={6} mt={1} spacing={1}>
             <Heading as="h3" size="lg">
               Liturgical Books
@@ -127,7 +145,11 @@ export default function Checklist() {
           </Stack>
         </CheckboxGroup>
 
-        <CheckboxGroup colorScheme={getColorScheme()}>
+        <CheckboxGroup
+          colorScheme={getColorScheme()}
+          onChange={handleCheckboxChange}
+          value={checkedValues}
+        >
           <Stack pl={6} mt={1} spacing={1}>
             <Heading as="h3" size="lg">
               Vessels
@@ -144,7 +166,11 @@ export default function Checklist() {
         </CheckboxGroup>
 
         {isScarfOffering && (
-          <CheckboxGroup colorScheme={getColorScheme()}>
+          <CheckboxGroup
+            colorScheme={getColorScheme()}
+            onChange={handleCheckboxChange}
+            value={checkedValues}
+          >
             <Stack pl={6} mt={1} spacing={1}>
               <Heading as="h3" size="lg">
                 Scarf Offering
@@ -158,12 +184,13 @@ export default function Checklist() {
               <Checkbox value="tt-khan">Tro Ta Scarf</Checkbox>
               <Checkbox value="tro-uy-khan">Tro Uy Scarf</Checkbox>
               <Checkbox value="tuyen-uy-khan">Tuyen Uy Scarf</Checkbox>
-              <Checkbox value="biretta">Biretta</Checkbox>
-              <Checkbox value="zuchetto">Zuchetto</Checkbox>
             </Stack>
           </CheckboxGroup>
         )}
       </Container>
+      <Button mt={4} colorScheme={getColorScheme()} onClick={handleClearChecks}>
+        Finish
+      </Button>
     </Container>
   );
 }

@@ -60,7 +60,7 @@ export default function Hero() {
             fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })}
           >
             Thiếu Nhi Thánh Thể <br />
-            Phung Vu Library
+            Phụng Vụ Checklist
           </Text>
           {/* <Stack direction={"row"}>
             <Button

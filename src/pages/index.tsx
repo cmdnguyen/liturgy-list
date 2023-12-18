@@ -32,11 +32,11 @@ function HomePage() {
       <Box p={4}>
         <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
           <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
-            Welcome to the Phung Vu Library!
+            Welcome to the Liturgy Checklist!
           </Heading>
           <Text color={"gray.100"} fontSize={{ base: "sm", sm: "lg" }}>
             This is an interactive checklist for any HT in the Liturgy
-            committee, or Ban Phung Vu, to use.
+            committee, or Ban Phụng Vụ, to use.
           </Text>
           <AspectRatio maxW="560px" ratio={16/9}>
             <iframe
