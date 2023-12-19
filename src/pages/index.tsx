@@ -40,7 +40,7 @@ function HomePage() {
           </Text>
           <AspectRatio maxW="560px" ratio={16/9}>
             <iframe
-              title="naruto"
+              title="Liturgical Items"
               src="https://www.youtube.com/embed/57CrxPpe-Es?si=iZEnMAvVeta7s-2e"
               allowFullScreen
             />
