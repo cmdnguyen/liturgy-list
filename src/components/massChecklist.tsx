@@ -112,7 +112,7 @@ export default function Checklist() {
         maxW={"6xl"}
         mt={12}
         as={SimpleGrid}
-        columns={{ base: 2, lg: 4 }}
+        columns={{ base: 1, md: 2, lg: 3, xl: 4  }}
       >
         <CheckboxGroup
           colorScheme={getColorScheme()}
