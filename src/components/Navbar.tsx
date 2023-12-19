@@ -71,7 +71,7 @@ import {
           <Stack justify={"flex-end"} direction={"row"} spacing={6}>
             <Flex display={{ base: "none", md: "flex" }}>
               <Button onClick={toggleColorMode}>
-                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+                {colorMode === "dark" ? <SunIcon /> : <MoonIcon /> }
               </Button>
               {/* <DesktopNav /> */}
             </Flex>
