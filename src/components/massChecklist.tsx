@@ -87,9 +87,7 @@ export default function Checklist() {
 
   return (
     <Container maxW={"7xl"}>
-      <Heading as="h2" size="xl" mb={4}>
-        {formatDate(currentDate)}
-      </Heading>
+
       {/* {liturgyData && (
         <div>
           <Heading as="h2" size="xl" mb={4}>

@@ -13,7 +13,7 @@ import {
   AspectRatio,
 } from "@chakra-ui/react";
 
-import { ReactElement } from "react";
+import { useEffect, useState } from "react";
 
 // interface CardProps {
 //   heading: string
@@ -25,6 +25,23 @@ import { ReactElement } from "react";
 import MassChecklist from "../components/massChecklist";
 
 function HomePage() {
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const formatDate = (date: Date) => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <>
       <Hero />
@@ -38,7 +55,7 @@ function HomePage() {
             This is an interactive checklist for any HT in the Liturgy
             committee, or Ban Phụng Vụ, to use.
           </Text>
-          <AspectRatio maxW="560px" ratio={16/9}>
+          <AspectRatio maxW="560px" ratio={16 / 9}>
             <iframe
               title="Liturgical Items"
               src="https://www.youtube.com/embed/57CrxPpe-Es?si=iZEnMAvVeta7s-2e"
@@ -48,6 +65,9 @@ function HomePage() {
         </Stack>
 
         <Container maxW={"7x1"} mt={12}>
+          <Heading as="h2" size="xl" mb={4}>
+            {formatDate(currentDate)}
+          </Heading>
           <Flex flexWrap="wrap" gridGap={6} justify="center">
             <MassChecklist />
           </Flex>

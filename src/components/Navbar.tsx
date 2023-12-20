@@ -1,95 +1,101 @@
 import {
-    Box,
-    Flex,
-    Text,
-    IconButton,
-    Button,
-    Stack,
-    Collapse,
-    Icon,
-    Popover,
-    Link,
-    PopoverTrigger,
-    PopoverContent,
-    useColorModeValue,
-    useBreakpointValue,
-    useDisclosure,
-    useColorMode,
-  } from "@chakra-ui/react";
-  import {
-    HamburgerIcon,
-    CloseIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-    MoonIcon,
-    SunIcon,
-  } from "@chakra-ui/icons";
-  
-  export default function Navbar() {
-    const { colorMode, toggleColorMode } = useColorMode();
-    const { isOpen, onToggle } = useDisclosure();
-  
-    return (
-      <Box>
+  Box,
+  Flex,
+  Text,
+  IconButton,
+  Button,
+  Stack,
+  Collapse,
+  Icon,
+  Popover,
+  Link,
+  PopoverTrigger,
+  PopoverContent,
+  useColorModeValue,
+  useBreakpointValue,
+  useDisclosure,
+  useColorMode,
+  Heading
+} from "@chakra-ui/react";
+import {
+  HamburgerIcon,
+  CloseIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
+  MoonIcon,
+  SunIcon,
+} from "@chakra-ui/icons";
+
+import NextLink from 'next/link'
+
+export default function Navbar() {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const { isOpen, onToggle } = useDisclosure();
+
+  return (
+    <Box>
+      <Flex
+        bg={useColorModeValue("white", "gray.800")}
+        color={useColorModeValue("gray.600", "white")}
+        minH={"60px"}
+        py={{ base: 2 }}
+        px={{ base: 4 }}
+        borderBottom={1}
+        borderStyle={"solid"}
+        borderColor={useColorModeValue("gray.200", "gray.900")}
+        align={"center"}
+      >
         <Flex
-          bg={useColorModeValue("white", "gray.800")}
-          color={useColorModeValue("gray.600", "white")}
-          minH={"60px"}
-          py={{ base: 2 }}
-          px={{ base: 4 }}
-          borderBottom={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.900")}
-          align={"center"}
+          flex={{ base: 1, md: "auto" }}
+          ml={{ base: -2 }}
+          display={{ base: "flex", md: "none" }}
         >
-          <Flex
-            flex={{ base: 1, md: "auto" }}
-            ml={{ base: -2 }}
-            display={{ base: "flex", md: "none" }}
-          >
-            <IconButton
+          {/* <IconButton
               onClick={onToggle}
               icon={
                 isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
               }
               variant={"ghost"}
               aria-label={"Toggle Navigation"}
-            />
-          </Flex>
-          <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-            <Link href="/">
-              <Text
-                textAlign={useBreakpointValue({ base: "center", md: "left" })}
-                fontFamily={"heading"}
-                color={useColorModeValue("gray.800", "white")}
-              >
-                VEYM Liturgy List
-              </Text>
-            </Link>
-          </Flex>
-  
-          <Stack justify={"flex-end"} direction={"row"} spacing={6}>
-            <Flex display={{ base: "none", md: "flex" }}>
-              <Button onClick={toggleColorMode}>
-                {colorMode === "dark" ? <SunIcon /> : <MoonIcon /> }
-              </Button>
-              {/* <DesktopNav /> */}
-            </Flex>
-          </Stack>
+            /> */}
         </Flex>
-  
-        {/* <Collapse in={isOpen} animateOpacity>
+        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+          <Link 
+            as={NextLink} 
+            href="/"         
+            _hover={{ textDecoration: "none" }}
+            _focus={{ outline: "none" }}>
+            <Heading
+              textAlign={useBreakpointValue({ base: "center", md: "left" })}
+              color={useColorModeValue("gray.800", "white")}
+            >
+              VEYM Liturgy List
+            </Heading>
+          </Link>
+        </Flex>
+
+        <Stack justify={"flex-end"} direction={"row"} spacing={6}>
+          <Flex display={{ base: "flex", md: "flex" }}>
+            <Button onClick={toggleColorMode}>
+              {colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
+            </Button>
+            {/* <DesktopNav /> */}
+          </Flex>
+        </Stack>
+      </Flex>
+
+      {/* <Collapse in={isOpen} animateOpacity>
           <MobileNav />
         </Collapse> */}
-      </Box>
-    );
-  }
-  
+    </Box>
+  );
+}
+
 //   const DesktopNav = () => {
 //     const linkColor = useColorModeValue("gray.600", "gray.200");
 //     const linkHoverColor = useColorModeValue("gray.800", "white");
 //     const popoverContentBgColor = useColorModeValue("white", "gray.800");
-  
+
 //     return (
 //       <Stack direction={"row"} spacing={4} ml={5}>
 //         {NAV_ITEMS.map((navItem) => (
@@ -111,7 +117,7 @@ import {
 //                   {navItem.label}
 //                 </Box>
 //               </PopoverTrigger>
-  
+
 //               {navItem.children && (
 //                 <PopoverContent
 //                   border={0}
@@ -134,7 +140,7 @@ import {
 //       </Stack>
 //     );
 //   };
-  
+
 //   const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 //     return (
 //       <Box
@@ -172,7 +178,7 @@ import {
 //       </Box>
 //     );
 //   };
-  
+
 //   const MobileNav = () => {
 //     return (
 //       <Stack
@@ -186,10 +192,10 @@ import {
 //       </Stack>
 //     );
 //   };
-  
+
 //   const MobileNavItem = ({ label, children, href }: NavItem) => {
 //     const { isOpen, onToggle } = useDisclosure();
-  
+
 //     return (
 //       <Stack spacing={4} onClick={children && onToggle}>
 //         <Box
@@ -218,7 +224,7 @@ import {
 //             />
 //           )}
 //         </Box>
-  
+
 //         <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
 //           <Stack
 //             mt={2}
@@ -239,14 +245,14 @@ import {
 //       </Stack>
 //     );
 //   };
-  
+
 //   interface NavItem {
 //     label: string;
 //     subLabel?: string;
 //     children?: Array<NavItem>;
 //     href?: string;
 //   }
-  
+
 //   const NAV_ITEMS: Array<NavItem> = [
 //     {
 //       label: "Chuyên Môn",
@@ -294,4 +300,3 @@ import {
 //       ],
 //     },
 //   ];
-  
