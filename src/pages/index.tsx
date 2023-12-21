@@ -11,6 +11,7 @@ import {
   Text,
   useColorModeValue,
   AspectRatio,
+  Select,
 } from "@chakra-ui/react";
 
 import { useEffect, useState } from "react";
@@ -22,10 +23,12 @@ import { useEffect, useState } from "react";
 //   href: string
 // }
 
-import MassChecklist from "../components/massChecklist";
+import MassChecklist from "../components/checklists/massChecklist";
+import AdorationChecklist from "@/components/checklists/adorationChecklist";
 
 function HomePage() {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedOption, setSelectedOption] = useState("mass");
 
   const formatDate = (date: Date) => {
     const options = {
@@ -40,6 +43,10 @@ function HomePage() {
       month: "long",
       day: "numeric",
     });
+  };
+
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
   };
 
   return (
@@ -64,13 +71,25 @@ function HomePage() {
           </AspectRatio>
         </Stack>
 
-        <Container maxW={"7x1"} mt={12}>
-          <Heading as="h2" size="xl" mb={4}>
-            {formatDate(currentDate)}
-          </Heading>
-          <Flex flexWrap="wrap" gridGap={6} justify="center">
-            <MassChecklist />
-          </Flex>
+        <Container maxW={"full"} mt={12}>
+          <Container maxW={"7xl"}>
+
+            <Heading as="h2" size="xl" mb={4}>
+              {formatDate(currentDate)}
+            </Heading>
+            <Flex flexWrap="wrap" gridGap={6} justify="center">
+        <Select
+          placeholder="Select option"
+          value={selectedOption}
+          onChange={handleSelectChange}
+        >
+          <option value="mass">Mass</option>
+          <option value="adoration">Adoration</option>
+        </Select>
+        {selectedOption === "mass" && <MassChecklist />}
+        {selectedOption === "adoration" && <AdorationChecklist />}
+      </Flex>
+          </Container>
         </Container>
       </Box>
     </>

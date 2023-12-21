@@ -33,7 +33,7 @@ export default function Hero() {
           transform: `scale(${heroImageIsReady ? 1 : 1.01})`,
           filter: heroImageIsReady ? "blur(2px)" : "blur(20px)",
         }}
-        onLoadingComplete={() => {
+        onLoad={() => {
           setHeroImageIsReady(true);
         }}
         fill
