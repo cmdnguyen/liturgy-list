@@ -6,8 +6,7 @@ import { useLiturgyData } from "../../utils/liturgyColorHelper";
 
 const AdorationChecklist: React.FC = () => {
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
-  const { liturgyData, liturgicalSeason, getColorScheme } = useLiturgyData()
-
+  const { liturgyData, liturgicalSeason, getColorScheme } = useLiturgyData();
 
   const handleCheckboxChange = (values: string[]) => {
     setCheckedValues(values);
@@ -19,7 +18,6 @@ const AdorationChecklist: React.FC = () => {
 
   return (
     <Container maxW={"full"}>
-
       <FormControl>
         {/* <FormLabel htmlFor="scarfOffering">Scarf Offering:</FormLabel>
         <Switch
@@ -35,13 +33,13 @@ const AdorationChecklist: React.FC = () => {
         as={SimpleGrid}
         columns={{ base: 1, md: 2, lg: 3, xl: 4 }}
       >
-      <ChecklistGroup
-        title="People"
-        items={["Lector", "Altar Servers"]}
-        colorScheme={getColorScheme()}
-        onChange={handleCheckboxChange}
-        checkedValues={checkedValues}
-      />
+        <ChecklistGroup
+          title="People"
+          items={["Lector", "Altar Servers"]}
+          colorScheme={getColorScheme()}
+          onChange={handleCheckboxChange}
+          checkedValues={checkedValues}
+        />
 
         <ChecklistGroup
           title="Incense"

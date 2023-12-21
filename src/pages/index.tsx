@@ -9,19 +9,12 @@ import {
   Icon,
   Stack,
   Text,
-  useColorModeValue,
   AspectRatio,
   Select,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import { useEffect, useState } from "react";
-
-// interface CardProps {
-//   heading: string
-//   description: string
-//   icon: ReactElement
-//   href: string
-// }
 
 import MassChecklist from "../components/checklists/massChecklist";
 import AdorationChecklist from "@/components/checklists/adorationChecklist";
@@ -45,7 +38,7 @@ function HomePage() {
     });
   };
 
-  const handleSelectChange = (event : any) => {
+  const handleSelectChange = (event: any) => {
     setSelectedOption(event.target.value);
   };
 
@@ -53,12 +46,16 @@ function HomePage() {
     <>
       <Hero />
 
-      <Box p={4}>
+      <Box
+        p={4}
+        bg={useColorModeValue("blackAlpha.50", "blackAlpha.300")}
+        color={useColorModeValue("gray.700", "gray.200")}
+      >
         <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
           <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
             Welcome to the Liturgy Checklist!
           </Heading>
-          <Text color={"gray.100"} fontSize={{ base: "sm", sm: "lg" }}>
+          <Text fontSize={{ base: "sm", sm: "lg" }}>
             This is an interactive checklist for any HT in the Liturgy
             committee, or Ban Phụng Vụ, to use.
           </Text>
@@ -73,22 +70,21 @@ function HomePage() {
 
         <Container maxW={"full"} mt={12}>
           <Container maxW={"7xl"}>
-
             <Heading as="h2" size="xl" mb={4}>
               {formatDate(currentDate)}
             </Heading>
             <Flex flexWrap="wrap" gridGap={6} justify="center">
-        <Select
-          placeholder="Select option"
-          value={selectedOption}
-          onChange={handleSelectChange}
-        >
-          <option value="mass">Mass</option>
-          <option value="adoration">Adoration</option>
-        </Select>
-        {selectedOption === "mass" && <MassChecklist />}
-        {selectedOption === "adoration" && <AdorationChecklist />}
-      </Flex>
+              <Select
+                placeholder="Select option"
+                value={selectedOption}
+                onChange={handleSelectChange}
+              >
+                <option value="mass">Mass</option>
+                <option value="adoration">Adoration</option>
+              </Select>
+              {selectedOption === "mass" && <MassChecklist />}
+              {selectedOption === "adoration" && <AdorationChecklist />}
+            </Flex>
           </Container>
         </Container>
       </Box>

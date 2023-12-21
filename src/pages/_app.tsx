@@ -2,25 +2,22 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Fragment } from "react";
 import Footer from "../components/Footer";
+import customTheme from "../app/theme";
 // import '../app/globals.css'
 import Navbar from "../components/Navbar";
 import { ChakraProvider, chakra, ColorModeProvider } from "@chakra-ui/react";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider>
-      <ColorModeProvider
-        options={{
-          initialColorMode: "dark",
-          useSystemColorMode: false,
-        }}
-      >
+    <ChakraProvider theme={customTheme}>
+      <ColorModeProvider>
         <Fragment>
           <Head>
-            <title>TNTT Liturgy List</title>
+            <title>VEYM Liturgy</title>
+            <link rel="icon" href="/monstrance-icon.jpg" />
           </Head>
         </Fragment>
-        <chakra.header id="header" bg="blue.600">
+        <chakra.header id="header">
           <Navbar />
         </chakra.header>
         <Component {...pageProps} />
