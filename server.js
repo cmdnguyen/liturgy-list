@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.get('/api/liturgy', async (req, res) => {
   try {
-    const response = await axios.get('http://calapi.inadiutorium.cz/api/v0/en/calendars/default/today', { withCredentials: true });
+    const response = await axios.get('https://liturgy-checklist.vercel.app/api/liturgy');
     res.json(response.data);
   } catch (error) {
     console.error('Error making API request:', error.message);
