@@ -20,10 +20,12 @@ app.use(express.json());
 
 app.get('/api/liturgy', async (req, res) => {
   try {
-    const response = await axios.get('https://calapi.inadiutorium.cz/api/v0/en/calendars/default/today');
+    const response = await axios.get('https://calapi.inadiutorium.cz/api/v0/en/calendars/default/today', { withCredentials: true });
     res.json(response.data);
   } catch (error) {
     console.error('Error making API request:', error.message);
+    console.error('Axios response data:', error.response?.data);
+    console.error('Axios response status:', error.response?.status);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
