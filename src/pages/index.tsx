@@ -29,7 +29,7 @@ function HomePage() {
   const fetchLiturgicalData = async () => {
     try {
       // Example: Fetch liturgical data for today
-      const response = await axios.get('http://localhost:3001/api/liturgy');
+      const response = await axios.get('https://liturgy-checklist.vercel.app/api/liturgy');
       // const data = await litrugyCalendarAPI(todayEndpoint);
 
       // Set the fetched data to state
