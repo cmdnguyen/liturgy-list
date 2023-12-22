@@ -29,9 +29,9 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
 
   const peopleItems = [
     { value: "Lector" },
-    { value: "Altar Servers", imageSrc: "./altarserver_cap12023.jpg" },
+    { value: "Altar Servers/Giúp Lễ ", imageSrc: "./altarserver_cap12023.jpg" },
     { value: "Ushers" },
-    { value: "Extraordinary Ministers of Holy Communion" },
+    { value: "Extraordinary Ministers of Holy Communion/Thừa Tác Viên Thánh Thể" },
   ];
   const liturgicalBooksItems = [
     {
@@ -42,7 +42,7 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
         "https://cdnlp.blob.core.windows.net/litpress/images/cvr_thumbs/4513.jpg",
     },
     {
-      value: "Roman Missal",
+      value: "Roman Missal/Sách Lễ Rôma",
       description:
         "The book that contains the prayers for Mass the priest says at the altar",
       imageSrc:
@@ -58,14 +58,14 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
 
   const vesselsItems = [
     {
-      value: "Paten",
+      value: "Paten/Dĩa Thánh",
       description:
         "A shallow dish that holds the bread which becomes the Body of Christ; it must be gold or gold-plated.",
       imageSrc:
         "https://qph.cf2.quoracdn.net/main-qimg-e4fb0c64c8ac9413fbd70496bf553692-lq",
     },
     {
-      value: "Chalice",
+      value: "Chalice/Chén Thánh",
       description:
         "The large cup used to hold the wine which becomes the Blood of Christ; it must be of gold or silver.",
       imageSrc: "https://www.stempers.com/Content/ProductImages/A-138G.jpg",
@@ -107,19 +107,24 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
         "https://cdn11.bigcommerce.com/s-t0lk210diy/images/stencil/640w/products/1825/5134/7752_8695_popup__82753.1652820872.jpg?c=1",
     },
     {
-      value: "Hosts",
+      value: "Hosts/Bánh Lễ",
       description:
         "The bread that becomes the Body of Christ; it must be unleavened and made of wheat flour and water only.",
       imageSrc:
         "https://wellsprings.com.sg/web/wp-content/uploads/2020/04/bread-for-communion.jpg",
     },
     {
-      value: "Altar Wine",
+      value: "Altar Wine/Rượu Lễ",
       description:
         "The wine that becomes the Blood of Christ; it must be natural wine made from grapes and contain no additives.",
       imageSrc:
         "https://www.churchsupplywarehouse.com/media/catalog/product/cache/396ec9ecd804173732678d2857828816/m/l/mlpaul750ml.jpg",
     },
+    {
+      value: "Candles/Nến",
+      description:
+        "Two candles are lit on the altar during Mass to represent the Light of Christ.",
+    }
   ];
 
   const scarfOfferingItems = [
@@ -203,7 +208,7 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
         />
 
         <ChecklistGroup
-          title="Liturgical Books"
+          title="Liturgical Books/ Sách Phụng Vụ"
           items={liturgicalBooksItems}
           colorScheme={getColorScheme()}
           onChange={handleCheckboxChange}
@@ -220,7 +225,7 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
 
         {isScarfOffering && (
           <ChecklistGroup
-            title="Scarf Offering"
+            title="Scarf Offering/Dâng Khăn"
             items={scarfOfferingItems}
             colorScheme={getColorScheme()}
             onChange={handleCheckboxChange}

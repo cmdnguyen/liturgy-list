@@ -30,7 +30,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
 
   const incenseItems = [
     {
-      value: "Thurible",
+      value: "Thurible/Bình Hương",
       description: "Incense burner",
       imageSrc:
         "https://todayscatholic.org/wp-content/uploads/2020/03/IMG_5533-683x1024.jpg",
@@ -42,7 +42,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
         "https://lh3.googleusercontent.com/-pKbklKhsCxo/X6Hw0wxrA_I/AAAAAAAAoM4/Bam8MMX_owoW8lE0FgiaNpS4yJx68f6kwCLcBGAsYHQ/w400-h194/two%2Bboat.png",
     },
     {
-      value: "Incense",
+      value: "Incense/Hương ",
       description: "Incense",
       imageSrc: "https://www.marianland.com/milagrosaintinsense/BS668.JPG",
     },
@@ -63,9 +63,9 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
     },
   ];
 
-  const vessalItems = [
+  const vesselItems = [
     {
-      value: "Monstrance",
+      value: "Monstrance//Mặt Nhật",
       description: "Holds the Eucharist",
       imageSrc:
         "https://cdn11.bigcommerce.com/s-du09xubjip/images/stencil/original/products/50860/551881/2060839_1_2023-02-16T20_04_05Z__87894.1676578698.jpg?c=2",
@@ -153,7 +153,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
         />
 
         <ChecklistGroup
-          title="Incense"
+          title="Incense/Xông Hương"
           items={incenseItems}
           colorScheme={getColorScheme()}
           onChange={handleCheckboxChange}
@@ -169,8 +169,8 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
         />
 
         <ChecklistGroup
-          title="Vessals"
-          items={vessalItems}
+          title="Vessels"
+          items={vesselItems}
           colorScheme={getColorScheme()}
           onChange={handleCheckboxChange}
           checkedValues={checkedValues}
@@ -178,7 +178,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
 
         {isScarfOffering && (
           <ChecklistGroup
-            title="Scarf Offering"
+            title="Scarf Offering/Dâng Khăn"
             items={scarfOfferingItems}
             colorScheme={getColorScheme()}
             onChange={handleCheckboxChange}

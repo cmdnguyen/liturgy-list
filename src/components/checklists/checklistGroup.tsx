@@ -20,6 +20,7 @@ interface ChecklistItem {
   value: string;
   description?: string;
   imageSrc?: string;
+  sundayOnly?: boolean;
 }
 
 interface ChecklistGroupProps {

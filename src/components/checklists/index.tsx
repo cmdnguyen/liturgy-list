@@ -40,8 +40,8 @@ const ChecklistIndex: React.FC = () => {
         m={useBreakpointValue({ base: "0 auto", md: "auto" })}
         width={useBreakpointValue({ base: "90%", sm:"50%", md: "45%",lg: "30%" })}
       >
-        <option value="mass">Mass</option>
-        <option value="adoration">Adoration</option>
+        <option value="mass">Mass/Thánh Lễ </option>
+        <option value="adoration">Adoration/Chầu Thánh Thể</option>
       </Select>
 
       {selectedOption === "mass" && (
