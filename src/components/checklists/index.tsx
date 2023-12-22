@@ -1,33 +1,85 @@
-import React from "react";
-import { Checkbox, CheckboxGroup, Stack, Heading } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Select,
+} from "@chakra-ui/react";
 
-interface ChecklistGroupProps {
-  title: string;
-  items: string[];
-  colorScheme: string;
-  onChange: (values: string[]) => void;
-  checkedValues: string[];
-}
+import MassChecklist from "./massChecklist";
+import AdorationChecklist from "./adorationChecklist";
+import { useLiturgyData } from "../../utils/liturgyColorHelper";
 
-const ChecklistGroup: React.FC<ChecklistGroupProps> = ({
-  title,
-  items,
-  colorScheme,
-  onChange,
-  checkedValues,
-}) => (
-  <CheckboxGroup colorScheme={colorScheme} onChange={onChange} value={checkedValues}>
-    <Stack pl={6} mt={1} spacing={1}>
-      <Heading as="h3" size="lg">
-        {title}
-      </Heading>
-      {items.map((item) => (
-        <Checkbox key={item} value={item}>
-          {item}
-        </Checkbox>
-      ))}
-    </Stack>
-  </CheckboxGroup>
-);
+const ChecklistIndex: React.FC = () => {
+  const [isFinishModalOpen, setIsFinishModalOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("mass");
+  const { liturgyData, liturgicalSeason, getColorScheme } = useLiturgyData();
+  const [checkedValues, setCheckedValues] = useState<string[]>([]);
 
-export default ChecklistGroup;
+  const handleFinishButtonClick = () => {
+    setCheckedValues([]);
+    setIsFinishModalOpen(true);
+  };
+
+  const handleCloseFinishModal = () => {
+    setIsFinishModalOpen(false);
+  };
+
+  return (
+    <>
+      <Select
+        placeholder="Select option"
+        value={selectedOption}
+        onChange={(event) => setSelectedOption(event.target.value)}
+      >
+        <option value="mass">Mass</option>
+        <option value="adoration">Adoration</option>
+      </Select>
+
+      {selectedOption === "mass" && (
+        <MassChecklist
+          checkedValues={checkedValues}
+          setCheckedValues={setCheckedValues}
+        />
+      )}
+      {selectedOption === "adoration" && (
+        <AdorationChecklist
+          checkedValues={checkedValues}
+          setCheckedValues={setCheckedValues}
+        />
+      )}
+
+      <Button
+        mt={4}
+        colorScheme={getColorScheme()}
+        onClick={handleFinishButtonClick}
+      >
+        Finish
+      </Button>
+
+      <Modal isOpen={isFinishModalOpen} onClose={handleCloseFinishModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Finish Checklist</ModalHeader>
+          <ModalBody>
+            <p>Set up is complete.</p>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              colorScheme={getColorScheme()}
+              onClick={handleCloseFinishModal}
+            >
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+export default ChecklistIndex;

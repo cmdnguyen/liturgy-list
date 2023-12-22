@@ -1,27 +1,22 @@
 // localhost:3000
+//pages/index.tsx
 import Hero from "../components/Hero";
 import {
   Box,
-  Button,
   Container,
-  Flex,
   Heading,
-  Icon,
   Stack,
   Text,
   AspectRatio,
-  Select,
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import MassChecklist from "../components/checklists/massChecklist";
-import AdorationChecklist from "@/components/checklists/adorationChecklist";
+import ChecklistIndex from "../components/checklists/index";
 
 function HomePage() {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedOption, setSelectedOption] = useState("mass");
 
   const formatDate = (date: Date) => {
     const options = {
@@ -36,10 +31,6 @@ function HomePage() {
       month: "long",
       day: "numeric",
     });
-  };
-
-  const handleSelectChange = (event: any) => {
-    setSelectedOption(event.target.value);
   };
 
   return (
@@ -58,6 +49,14 @@ function HomePage() {
           <Text fontSize={{ base: "sm", sm: "lg" }}>
             This is an interactive checklist for any HT in the Liturgy
             committee, or Ban Phụng Vụ, to use.
+            <br />
+            The checklist is based on the items you see in Mass and Adoration.
+            Not all are needed. Please check with your chaplain on what is
+            needed for your mass in your chapter or league of chapters.
+            <br />
+            There is a button that describes the item and shows what it
+            generally looks like. <br />
+            Please select the appropriate option below to get started.
           </Text>
           <AspectRatio maxW="560px" ratio={16 / 9}>
             <iframe
@@ -73,18 +72,7 @@ function HomePage() {
             <Heading as="h2" size="xl" mb={4}>
               {formatDate(currentDate)}
             </Heading>
-            <Flex flexWrap="wrap" gridGap={6} justify="center">
-              <Select
-                placeholder="Select option"
-                value={selectedOption}
-                onChange={handleSelectChange}
-              >
-                <option value="mass">Mass</option>
-                <option value="adoration">Adoration</option>
-              </Select>
-              {selectedOption === "mass" && <MassChecklist />}
-              {selectedOption === "adoration" && <AdorationChecklist />}
-            </Flex>
+            <ChecklistIndex />
           </Container>
         </Container>
       </Box>
