@@ -16,8 +16,9 @@ export const useLiturgyData = () => {
         const formattedDate = `${year}-${month}-${day}`;
 
         // Fetch data from liturgyCalendarAPI
-        const url = `http://calapi.inadiutorium.cz/api/v0/en/calendars/default/${year}/${month}/${day}`;
-
+        const url = `http://calapi.inadiutorium.cz/api/v0/en/calendars/default/today`;
+        // Color test
+        // const url = `http://calapi.inadiutorium.cz/api/v0/en/calendars/default/${year}/${month}/${day}`;
         const response = await axios.get(url);
         const data = response.data;
 
