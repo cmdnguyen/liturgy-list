@@ -13,7 +13,7 @@ import {
 
 import MassChecklist from "./massChecklist";
 import AdorationChecklist from "./adorationChecklist";
-import { useLiturgyData } from "../../utils/liturgyColorHelper";
+import { useLiturgyData } from "../../utils/liturgyAPI";
 
 const ChecklistIndex: React.FC = () => {
   const [isFinishModalOpen, setIsFinishModalOpen] = useState(false);
