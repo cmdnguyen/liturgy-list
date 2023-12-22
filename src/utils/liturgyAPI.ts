@@ -22,7 +22,7 @@ export const useLiturgyData = () => {
         const data = response.data;
 
         setLiturgyData(data);
-
+        console.log(data);
         const season = data.season || "";
         setLiturgicalSeason(season.toLowerCase());
       } catch (error) {
@@ -49,7 +49,7 @@ export const useLiturgyData = () => {
 
     // Get the color from the first celebration (assuming it's representative)
     const firstCelebrationColor = liturgyData.celebrations[0].colour.toLowerCase();
-
+    console.log("celebrationColor:",firstCelebrationColor);
     // Return the mapped color scheme or default to "red"
     return colorMapping[firstCelebrationColor] || "blue";
   };
