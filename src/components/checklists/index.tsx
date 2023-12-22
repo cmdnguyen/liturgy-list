@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import {
   Button,
   Modal,
@@ -8,6 +8,7 @@ import {
   ModalBody,
   ModalFooter,
   Select,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 import MassChecklist from "./massChecklist";
@@ -35,6 +36,9 @@ const ChecklistIndex: React.FC = () => {
         placeholder="Select option"
         value={selectedOption}
         onChange={(event) => setSelectedOption(event.target.value)}
+        display={"block"}
+        m={useBreakpointValue({ base: "0 auto", md: "auto" })}
+        width={useBreakpointValue({ base: "90%", sm:"50%", md: "45%",lg: "30%" })}
       >
         <option value="mass">Mass</option>
         <option value="adoration">Adoration</option>
@@ -54,9 +58,11 @@ const ChecklistIndex: React.FC = () => {
       )}
 
       <Button
-        mt={4}
+        mt={10}
         colorScheme={getColorScheme()}
         onClick={handleFinishButtonClick}
+        display={"block"}
+        mx={useBreakpointValue({ base: "0 auto", md: "auto" })}
       >
         Finish
       </Button>
@@ -72,6 +78,7 @@ const ChecklistIndex: React.FC = () => {
             <Button
               colorScheme={getColorScheme()}
               onClick={handleCloseFinishModal}
+
             >
               Close
             </Button>

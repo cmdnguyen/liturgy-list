@@ -5,6 +5,7 @@ import {
   FormLabel,
   Switch,
   SimpleGrid,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 import ChecklistGroup from "./checklistGroup";
@@ -28,7 +29,7 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
 
   const peopleItems = [
     { value: "Lector" },
-    { value: "Altar Servers" },
+    { value: "Altar Servers", imageSrc: "./altarserver_cap12023.jpg" },
     { value: "Ushers" },
     { value: "Extraordinary Ministers of Holy Communion" },
   ];
@@ -160,8 +161,18 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
     },
   ];
   return (
-    <Container maxW={"full"} mt={1}>
-      <FormControl>
+    <Container maxW={"full"}>
+      <FormControl
+        display={"block-inline-flex"}
+        mt={3}
+        mx={useBreakpointValue({ base: "0 auto", md: "auto" })}
+        width={useBreakpointValue({
+          base: "90%",
+          sm: "50%",
+          md: "45%",
+          lg: "30%",
+        })}
+      >
         {/* <FormLabel htmlFor="isSunday">Sunday Mass:</FormLabel>
         <Switch
           id="isSunday"
@@ -178,9 +189,10 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
 
       <Container
         maxW={"full"}
-        mt={12}
+        mt={useBreakpointValue({ base: 1, md: 4 })}
         as={SimpleGrid}
         columns={{ base: 1, md: 2, lg: 3, xl: 4 }}
+        mx={"auto"}
       >
         <ChecklistGroup
           title="People"

@@ -42,7 +42,13 @@ function HomePage() {
         bg={useColorModeValue("blackAlpha.50", "blackAlpha.300")}
         color={useColorModeValue("gray.700", "gray.200")}
       >
-        <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
+        <Stack
+          spacing={4}
+          as={Container}
+          maxW={"6xl"}
+          textAlign={"center"}
+          m="auto"
+        >
           <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
             Welcome to the Liturgy Checklist!
           </Heading>
@@ -51,14 +57,15 @@ function HomePage() {
             committee, or Ban Phụng Vụ, to use.
             <br />
             The checklist is based on the items you see in Mass and Adoration.
-            Not all are needed. Please check with your chaplain on what is
-            needed for your mass in your chapter or league of chapters.
+            Not all are needed.
+            <br />
+            Please check with your chaplain on what is needed for your mass in
+            your chapter or league of chapters.
             <br />
             There is a button that describes the item and shows what it
-            generally looks like. <br />
-            Please select the appropriate option below to get started.
+            generally looks like.
           </Text>
-          <AspectRatio maxW="560px" ratio={16 / 9}>
+          <AspectRatio ml={10}maxW="85%" ratio={16 / 9}>
             <iframe
               title="Liturgical Items"
               src="https://www.youtube.com/embed/57CrxPpe-Es?si=iZEnMAvVeta7s-2e"
@@ -67,13 +74,11 @@ function HomePage() {
           </AspectRatio>
         </Stack>
 
-        <Container maxW={"full"} mt={12}>
-          <Container maxW={"7xl"}>
-            <Heading as="h2" size="xl" mb={4}>
-              {formatDate(currentDate)}
-            </Heading>
-            <ChecklistIndex />
-          </Container>
+        <Container maxW={"8xl"} mt={12}>
+          <Heading as="h2" size="lg" mb={4} textAlign={"center"}>
+            {formatDate(currentDate)}
+          </Heading>
+          <ChecklistIndex />
         </Container>
       </Box>
     </>

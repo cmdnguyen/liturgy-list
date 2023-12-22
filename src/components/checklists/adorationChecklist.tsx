@@ -5,6 +5,7 @@ import {
   SimpleGrid,
   FormLabel,
   Switch,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import ChecklistGroup from "./checklistGroup";
 
@@ -116,8 +117,18 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
     },
   ];
   return (
-    <Container maxW={"full"} mt={1}>
-      <FormControl>
+    <Container maxW={"full"}>
+      <FormControl
+        display={"block-inline-flex"}
+        mt={3}
+        mx={useBreakpointValue({ base: "0 auto", md: "auto" })}
+        width={useBreakpointValue({
+          base: "90%",
+          sm: "50%",
+          md: "45%",
+          lg: "30%",
+        })}
+      >
         <FormLabel htmlFor="scarfOffering">Scarf Offering:</FormLabel>
         <Switch
           id="scarfOffering"
@@ -128,9 +139,10 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
 
       <Container
         maxW={"full"}
-        mt={12}
+        mt={useBreakpointValue({ base: 0, md: 4 })}
         as={SimpleGrid}
-        columns={{ base: 1, md: 2, lg: 3, xl: 4 }}
+        columns={{ base: 1, md: 2, lg: 3, xl: 5 }}
+        mx={"auto"}
       >
         <ChecklistGroup
           title="People"
