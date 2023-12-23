@@ -19,6 +19,9 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ liturgyData }) => {
   const { liturgicalSeason, getColorScheme, loading } = useLiturgyData();
+  const bgColor = useColorModeValue("blackAlpha.50", "blackAlpha.300");
+  const textColor = useColorModeValue("gray.700", "gray.200");
+
 
   useEffect(() => {
     console.log("Component has mounted");
@@ -41,11 +44,7 @@ const HomePage: React.FC<HomePageProps> = ({ liturgyData }) => {
   return (
     <>
       <Hero />
-      <Box
-        p={4}
-        bg={useColorModeValue("blackAlpha.50", "blackAlpha.300")}
-        color={useColorModeValue("gray.700", "gray.200")}
-      >
+      <Box p={4} bg={bgColor} color={textColor}>
         <Stack
           spacing={4}
           as={Container}
@@ -107,15 +106,26 @@ const HomePage: React.FC<HomePageProps> = ({ liturgyData }) => {
 };
 
 export async function getServerSideProps() {
-  // Fetch data from the API endpoint using the environment variable
-  const res = await fetch(process.env.NEXT_PUBLIC_API_URL || "");
-  const liturgyData = await res.json();
+  try {
+    // Fetch data from the API endpoint using the environment variable
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL || "");
+    const liturgyData = await res.json();
 
-  return {
-    props: {
-      liturgyData,
-    },
-  };
+    console.log("Fetched liturgyData:", liturgyData); // Log fetched data
+
+    return {
+      props: {
+        liturgyData,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        liturgyData: null,
+      },
+    };
+  }
 }
 
 
