@@ -35,7 +35,11 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <Box p={4} bg={bgColor} color={textColor}>
+      <Box
+        p={4}
+        bg={useColorModeValue("blackAlpha.50", "blackAlpha.300")}
+        color={useColorModeValue("gray.700", "gray.200")}
+      >
         <Stack
           spacing={4}
           as={Container}
