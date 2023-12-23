@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { makeApiRequest } from '../api/liturgyAPI';
 
-export const fetchLiturgyData = async () => {
+export const fetchLiturgyData = () => {
   try {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -11,7 +11,7 @@ export const fetchLiturgyData = async () => {
     const formattedDate = `${year}/${month}/${day}`;
 
     const endpoint = `/calendars/default/${formattedDate}`;
-    const data = await makeApiRequest(endpoint);
+    const data = makeApiRequest(endpoint);
 
     return { data, formattedDate };
   } catch (error) {
@@ -27,10 +27,11 @@ export const useLiturgyData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data, formattedDate } = await fetchLiturgyData();
+        const { data, formattedDate } = fetchLiturgyData();
         setLiturgyData(data);
         console.log(data);
-        const season = data.season || '';
+        const resolvedData = await data;
+        const season = resolvedData.season || '';
         setLiturgicalSeason(season.toLowerCase());
       } catch (error) {
         console.error('Error fetching liturgy data:', error);
