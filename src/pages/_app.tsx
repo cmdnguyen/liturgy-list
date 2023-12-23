@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Fragment } from "react";
 import Footer from "../components/Footer";
-import customTheme from "../app/theme";
+import customTheme from "../theme/theme";
 // import '../app/globals.css'
 import Navbar from "../components/Navbar";
 import { ChakraProvider, chakra, ColorModeProvider } from "@chakra-ui/react";

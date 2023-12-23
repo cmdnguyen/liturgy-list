@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import ChecklistGroup from "./checklistGroup";
 
-import { useLiturgyData } from "../../utils/liturgyColorHelper";
+import { useLiturgyData } from "../../utils/hooks/useLiturgyData";
 
 interface AdorationChecklistProps {
   checkedValues: string[];
@@ -72,7 +72,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
     },
     {
       value: "Luna",
-      description: "Used to the Eucharist in Monstrance",
+      description: "Used to put the Eucharist in Monstrance",
       imageSrc:
         "https://www.sunjournal.com/wp-content/uploads/sites/11/2017/01/Luna-PS.jpg",
     },
