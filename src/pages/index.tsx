@@ -26,8 +26,8 @@ const HomePage: React.FC<HomePageProps> = ({ liturgyData }) => {
   useEffect(() => {
     console.log("Component has mounted");
     console.log("liturgyData:", liturgyData);
-    console.log("liturgicalSeason:", liturgicalSeason);
-  }, [liturgyData, liturgicalSeason]);
+    console.log("liturgicalSeason:", liturgyData.season);
+  }, [liturgyData, liturgyData.season]);
 
   if (loading) {
     return <div>Loading...</div>; // Show a loading indicator
