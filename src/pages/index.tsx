@@ -9,12 +9,19 @@ import {
   AspectRatio,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+
+import { useEffect } from "react";
 import ChecklistIndex from "../components/checklists/index";
 import { useLiturgyData } from "../utils/hooks/useLiturgyData";
 
 function HomePage() {
   const { liturgyData, liturgicalSeason, getColorScheme } = useLiturgyData();
+
+  useEffect(() => {
+    console.log("Component has mounted");
+    // Fetch liturgical data on component mount
+    // (Optional: You can still have this here for additional setup)
+  }, []);
 
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {

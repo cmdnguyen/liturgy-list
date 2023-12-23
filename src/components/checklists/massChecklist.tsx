@@ -8,7 +8,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 
-import ChecklistGroup from "./checklistGroup";
+import ChecklistGroup from "./ChecklistGroup";
 import { useLiturgyData } from "../../utils/hooks/useLiturgyData";
 
 interface MassChecklistProps {
