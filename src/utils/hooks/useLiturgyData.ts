@@ -1,24 +1,6 @@
 // utils/hooks/useLiturgyData.ts
 import { useState, useEffect } from 'react';
-import { makeApiRequest } from '../api/liturgyAPI';
-
-export const fetchLiturgyData = async () => {
-  try {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-    const day = currentDate.getDate().toString().padStart(2, '0');
-    const formattedDate = `${year}/${month}/${day}`;
-
-    const endpoint = `/calendars/default/${formattedDate}`;
-    const data = await makeApiRequest(endpoint);
-
-    return { data, formattedDate };
-  } catch (error) {
-    console.error('Error fetching liturgy data:', error);
-    throw error;
-  }
-};
+import { fetchLiturgyData } from '../api/fetchLiturgyData';
 
 export const useLiturgyData = () => {
   const [liturgyData, setLiturgyData] = useState<any>(null);

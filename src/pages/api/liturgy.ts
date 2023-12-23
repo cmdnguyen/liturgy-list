@@ -1,6 +1,6 @@
 // pages/api/liturgy.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import { fetchLiturgyData } from '../../utils/hooks/useLiturgyData';
+import { fetchLiturgyData } from '../../utils/api/fetchLiturgyData';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
