@@ -39,27 +39,27 @@ export const useLiturgyData = () => {
 
     fetchData();
   }, []);
-  
-    const getColorScheme = () => {
-      if (!liturgyData || !liturgyData.celebrations || liturgyData.celebrations.length === 0) {
-        return 'blue'; // Default color if no data is available
-      }
-  
-      // Map celebration colors to color schemes
-      const colorMapping: Record<string, string> = {
-        green: 'green',
-        violet: 'purple',
-        white: 'gray',
-        red: 'red',
-        // Add more mappings as needed
-      };
-  
-      // Get the color from the first celebration (assuming it's representative)
-      const firstCelebrationColor = liturgyData.celebrations[0].colour.toLowerCase();
-      console.log('celebrationColor:', firstCelebrationColor);
-      // Return the mapped color scheme or default to 'red'
-      return colorMapping[firstCelebrationColor] || 'blue';
+
+  const getColorScheme = () => {
+    if (!liturgyData || !liturgyData.celebrations || liturgyData.celebrations.length === 0) {
+      return 'blue'; // Default color if no data is available
+    }
+
+    // Map celebration colors to color schemes
+    const colorMapping: Record<string, string> = {
+      green: 'green',
+      violet: 'purple',
+      white: 'gray',
+      red: 'red',
+      // Add more mappings as needed
     };
-  
-    return { liturgyData, liturgicalSeason, getColorScheme };
+
+    // Get the color from the first celebration (assuming it's representative)
+    const firstCelebrationColor = liturgyData.celebrations[0].colour.toLowerCase();
+    console.log('celebrationColor:', firstCelebrationColor);
+    // Return the mapped color scheme or default to 'red'
+    return colorMapping[firstCelebrationColor] || 'blue';
   };
+
+  return { liturgyData, liturgicalSeason, getColorScheme };
+};

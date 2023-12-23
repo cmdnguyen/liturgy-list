@@ -12,10 +12,11 @@ import {
 import { useEffect } from "react";
 import Hero from "../components/Hero";
 import ChecklistIndex from "../components/checklists/index";
-import { useLiturgyData } from "../utils/hooks/useLiturgyData";
+import { useLiturgyData, fetchLiturgyData } from "../utils/hooks/useLiturgyData";
 
-function HomePage() {
-  const { liturgyData, liturgicalSeason, getColorScheme } = useLiturgyData();
+function HomePage({ liturgyData }: { liturgyData: any }) {
+  const { liturgicalSeason, getColorScheme } = useLiturgyData();
+
 
   useEffect(() => {
     console.log("Component has mounted");
@@ -96,5 +97,16 @@ function HomePage() {
     </>
   );
 }
+
+export async function getServerSideProps() {
+  const { data: liturgyData } = await fetchLiturgyData();
+
+  return {
+    props: {
+      liturgyData,
+    },
+  };
+}
+
 
 export default HomePage;
