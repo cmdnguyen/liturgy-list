@@ -12,7 +12,7 @@ import {
 import { useEffect } from "react";
 import Hero from "../components/Hero";
 import ChecklistIndex from "../components/checklists/index";
-import { useLiturgyData, fetchLiturgyData } from "../utils/hooks/useLiturgyData";
+import { useLiturgyData } from "../utils/hooks/useLiturgyData";
 
 function HomePage({ liturgyData }: { liturgyData: any }) {
   const { liturgicalSeason, getColorScheme } = useLiturgyData();
@@ -96,16 +96,6 @@ function HomePage({ liturgyData }: { liturgyData: any }) {
       </Box>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const { data: liturgyData } = await fetchLiturgyData();
-
-  return {
-    props: {
-      liturgyData,
-    },
-  };
 }
 
 
