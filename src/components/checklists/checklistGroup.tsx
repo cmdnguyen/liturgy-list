@@ -14,6 +14,7 @@ import {
   Image,
   useBreakpointValue,
 } from "@chakra-ui/react";
+
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 
 interface ChecklistItem {

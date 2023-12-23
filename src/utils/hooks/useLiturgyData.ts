@@ -1,39 +1,29 @@
 // utils/hooks/useLiturgyData.ts
 import { useState, useEffect } from 'react';
-import { makeApiRequest } from '../api/liturgyAPI';
+import { fetchLiturgyData } from '../api/fetchLiturgyData';
 
 export const useLiturgyData = () => {
   const [liturgyData, setLiturgyData] = useState<any>(null);
   const [liturgicalSeason, setLiturgicalSeason] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(true); // Add loading state
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-        const day = currentDate.getDate().toString().padStart(2, '0');
-        const formattedDate = `${year}/${month}/${day}`;
-
-        const endpoint = `/calendars/default/${formattedDate}`;
-        const data = await makeApiRequest(endpoint);
-
+        const { data, formattedDate } = await fetchLiturgyData();
         setLiturgyData(data);
 
         const season = data.season || '';
         setLiturgicalSeason(season.toLowerCase());
-        console.log('API Response:', data);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching liturgy data:', error);
-      } finally {
-        setLoading(false); // Set loading to false regardless of success or failure
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
-
   const getColorScheme = () => {
     if (!liturgyData || !liturgyData.celebrations || liturgyData.celebrations.length === 0) {
       return 'blue'; // Default color if no data is available
