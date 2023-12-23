@@ -1,5 +1,4 @@
 // pages/index.tsx
-import Hero from "../components/Hero";
 import {
   Box,
   Container,
@@ -11,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useEffect } from "react";
+import Hero from "../components/Hero";
 import ChecklistIndex from "../components/checklists/index";
 import { useLiturgyData } from "../utils/hooks/useLiturgyData";
 

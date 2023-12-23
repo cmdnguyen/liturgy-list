@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { makeApiRequest } from '../api/liturgyAPI';
 
-export const fetchLiturgyData = () => {
+export const fetchLiturgyData = async () => {
   try {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -11,7 +11,7 @@ export const fetchLiturgyData = () => {
     const formattedDate = `${year}/${month}/${day}`;
 
     const endpoint = `/calendars/default/${formattedDate}`;
-    const data = makeApiRequest(endpoint);
+    const data = await makeApiRequest(endpoint);
 
     return { data, formattedDate };
   } catch (error) {
@@ -27,11 +27,10 @@ export const useLiturgyData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data, formattedDate } = fetchLiturgyData();
+        const { data, formattedDate } = await fetchLiturgyData();
         setLiturgyData(data);
         console.log(data);
-        const resolvedData = await data;
-        const season = resolvedData.season || '';
+        const season = data.season || '';
         setLiturgicalSeason(season.toLowerCase());
       } catch (error) {
         console.error('Error fetching liturgy data:', error);
@@ -40,7 +39,6 @@ export const useLiturgyData = () => {
 
     fetchData();
   }, []);
-
   
     const getColorScheme = () => {
       if (!liturgyData || !liturgyData.celebrations || liturgyData.celebrations.length === 0) {
