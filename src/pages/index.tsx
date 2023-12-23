@@ -1,5 +1,4 @@
-// localhost:3000
-//pages/index.tsx
+// pages/index.tsx
 import Hero from "../components/Hero";
 import {
   Box,
@@ -10,37 +9,12 @@ import {
   AspectRatio,
   useColorModeValue,
 } from "@chakra-ui/react";
-
 import { useState, useEffect } from "react";
-
 import ChecklistIndex from "../components/checklists/index";
-import axios from 'axios';
-// import { litrugyCalendarAPI } from "../utils/liturgyCalendarAPI";
+import { useLiturgyData } from "../utils/hooks/useLiturgyData";
 
 function HomePage() {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [liturgicalData, setLiturgicalData] = useState<any>(null);
-
-  useEffect(() => {
-    // Fetch liturgical data on component mount
-    fetchLiturgicalData();
-  }, []);
-
-  const fetchLiturgicalData = async () => {
-    try {
-      // Example: Fetch liturgical data for today
-      const response = await axios.get('https://liturgy-checklist.vercel.app/api/liturgy');
-      // const data = await litrugyCalendarAPI(todayEndpoint);
-
-      // Set the fetched data to state
-      setLiturgicalData(response.data);
-
-      // You can do additional processing with the data if needed
-      // For example, extracting specific information and updating state
-    } catch (error) {
-      console.error("Error fetching liturgical data:", (error as any).message);
-    }
-  };
+  const { liturgyData, liturgicalSeason, getColorScheme } = useLiturgyData();
 
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
@@ -54,7 +28,6 @@ function HomePage() {
   return (
     <>
       <Hero />
-
       <Box
         p={4}
         bg={useColorModeValue("blackAlpha.50", "blackAlpha.300")}
@@ -91,15 +64,14 @@ function HomePage() {
             />
           </AspectRatio>
         </Stack>
-
         <Container maxW={"8xl"} mt={12}>
           <Heading as="h2" size="lg" mb={4} textAlign={"center"}>
-            {formatDate(currentDate)}
+            {formatDate(new Date())}
           </Heading>
-        {/* Display liturgical data in your component */}
-        {liturgicalData && (
+          {/* Display liturgical data in your component */}
+          {liturgyData && (
             <Stack spacing={4} textAlign="center">
-              {liturgicalData.celebrations.map((celebration: any, index: number) => (
+              {liturgyData.celebrations.map((celebration: any, index: number) => (
                 <div key={index}>
                   <Heading as="h3" size="md">
                     Celebration: {celebration.title}
