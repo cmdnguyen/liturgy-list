@@ -72,7 +72,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
     },
     {
       value: "Luna",
-      description: "Used to the Eucharist in Monstrance",
+      description: "Used to put the Eucharist in Monstrance",
       imageSrc:
         "https://www.sunjournal.com/wp-content/uploads/sites/11/2017/01/Luna-PS.jpg",
     },

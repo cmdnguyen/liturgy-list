@@ -111,7 +111,7 @@ export async function getServerSideProps() {
     const res = await fetch(process.env.NEXT_PUBLIC_API_URL || "");
     const liturgyData = await res.json();
 
-    console.log("Fetched liturgyData:", liturgyData); // Log fetched data
+    // console.log("Fetched liturgyData:", liturgyData); // Log fetched data
 
     return {
       props: {

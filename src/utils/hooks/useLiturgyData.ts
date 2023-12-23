@@ -23,6 +23,7 @@ export const useLiturgyData = () => {
 
         const season = data.season || '';
         setLiturgicalSeason(season.toLowerCase());
+        console.log('API Response:', data);
       } catch (error) {
         console.error('Error fetching liturgy data:', error);
       } finally {
