@@ -15,7 +15,7 @@ export const fetchLiturgyData = async () => {
 
     return { data, formattedDate };
   } catch (error) {
-    console.error('Error fetching liturgy data:', error);
+    console.error('Error fetching liturgy data for fetchLiturgyData:', error);
     throw error;
   }
 };

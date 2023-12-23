@@ -17,7 +17,7 @@ export const useLiturgyData = () => {
         setLiturgicalSeason(season.toLowerCase());
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching liturgy data:', error);
+        console.error('Error fetching liturgy data for useLiturgyData:', error);
         setLoading(false);
       }
     };
