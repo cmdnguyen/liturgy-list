@@ -7,7 +7,7 @@ import {
   Switch,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import ChecklistGroup from "./ChecklistGroup";
+import ChecklistGroup from "./checklistGroup";
 
 import { useLiturgyData } from "../../utils/hooks/useLiturgyData";
 
