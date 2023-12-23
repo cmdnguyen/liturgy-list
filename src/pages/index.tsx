@@ -1,4 +1,4 @@
-// pages/index.tsx
+import React, { useEffect } from "react";
 import {
   Box,
   Container,
@@ -9,21 +9,26 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { useEffect } from "react";
 import Hero from "../components/Hero";
 import ChecklistIndex from "../components/checklists/index";
 import { useLiturgyData } from "../utils/hooks/useLiturgyData";
 
-function HomePage({ liturgyData }: { liturgyData: any }) {
-  const { liturgicalSeason, getColorScheme } = useLiturgyData();
+interface HomePageProps {
+  liturgyData: any;
+}
 
+const HomePage: React.FC<HomePageProps> = ({ liturgyData }) => {
+  const { liturgicalSeason, getColorScheme, loading } = useLiturgyData();
 
   useEffect(() => {
     console.log("Component has mounted");
-    // Fetch liturgical data on component mount
-    // (Optional: You can still have this here for additional setup)
-  }, []);
+    console.log("liturgyData:", liturgyData);
+    console.log("liturgicalSeason:", liturgicalSeason);
+  }, [liturgyData, liturgicalSeason]);
 
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading indicator
+  }
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
       weekday: "long",
@@ -76,19 +81,22 @@ function HomePage({ liturgyData }: { liturgyData: any }) {
           <Heading as="h2" size="lg" mb={4} textAlign={"center"}>
             {formatDate(new Date())}
           </Heading>
-          {/* Display liturgical data in your component */}
+          {/* Directly render liturgical data in your component */}
           {liturgyData && (
             <Stack spacing={4} textAlign="center">
-              {liturgyData.celebrations.map((celebration: any, index: number) => (
-                <div key={index}>
-                  <Heading as="h3" size="md">
-                    Celebration: {celebration.title}
-                  </Heading>
-                  <Text>
-                    Color: {celebration.colour}, Liturgical Day Rank: {celebration.rank}
-                  </Text>
-                </div>
-              ))}
+              {liturgyData.celebrations.map(
+                (celebration: any, index: number) => (
+                  <div key={index}>
+                    <Heading as="h3" size="md">
+                      Celebration: {celebration.title}
+                    </Heading>
+                    <Text>
+                      Color: {celebration.colour}, Liturgical Day Rank:{" "}
+                      {celebration.rank}
+                    </Text>
+                  </div>
+                )
+              )}
             </Stack>
           )}
           <ChecklistIndex />
@@ -96,6 +104,18 @@ function HomePage({ liturgyData }: { liturgyData: any }) {
       </Box>
     </>
   );
+};
+
+export async function getServerSideProps() {
+  // Fetch data from the API endpoint using the environment variable
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL || "");
+  const liturgyData = await res.json();
+
+  return {
+    props: {
+      liturgyData,
+    },
+  };
 }
 
 
