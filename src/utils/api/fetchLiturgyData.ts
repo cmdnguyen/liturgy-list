@@ -11,7 +11,10 @@ export const fetchLiturgyData = async () => {
 
     const endpoint = `/calendars/default/${formattedDate}`;
     const data = await makeApiRequest(endpoint);
-
+    
+    const liturgyData = await makeApiRequest('/liturgy');
+    console.log('Liturgy Data from liturgy:', data);
+    console.log('Liturgy Data from fld:', liturgyData);
 
     return { data, formattedDate };
   } catch (error) {
