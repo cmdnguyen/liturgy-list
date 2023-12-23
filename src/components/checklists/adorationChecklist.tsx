@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import ChecklistGroup from "./checklistGroup";
 
-import { useLiturgyData } from "../../utils/hooks/useLiturgyData";
+import { useLiturgyData } from "../../utils/liturgyColorHelper";
 
 interface AdorationChecklistProps {
   checkedValues: string[];

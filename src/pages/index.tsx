@@ -9,30 +9,21 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
+import { useState } from "react";
+
 import Hero from "../components/Hero";
 import ChecklistIndex from "../components/checklists/index";
-import { useLiturgyData } from "../utils/hooks/useLiturgyData";
 
-interface HomePageProps {
-  liturgyData: any;
-}
+function HomePage() {
+  const [currentDate, setCurrentDate] = useState(new Date());
 
-const HomePage: React.FC<HomePageProps> = ({ liturgyData }) => {
-  const { liturgicalSeason, getColorScheme, loading } = useLiturgyData();
-  const bgColor = useColorModeValue("blackAlpha.50", "blackAlpha.300");
-  const textColor = useColorModeValue("gray.700", "gray.200");
-
-
-  useEffect(() => {
-    console.log("Component has mounted");
-    console.log("liturgyData:", liturgyData);
-    console.log("liturgicalSeason:", liturgyData.season);
-  }, [liturgyData, liturgyData.season]);
-
-  if (loading) {
-    return <div>Loading...</div>; // Show a loading indicator
-  }
   const formatDate = (date: Date) => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
     return date.toLocaleDateString("en-US", {
       weekday: "long",
       year: "numeric",
@@ -68,7 +59,7 @@ const HomePage: React.FC<HomePageProps> = ({ liturgyData }) => {
             There is a button that describes the item and shows what it
             generally looks like.
           </Text>
-          <AspectRatio ml={10} maxW="85%" ratio={16 / 9}>
+          <AspectRatio ml={10}maxW="85%" ratio={16 / 9}>
             <iframe
               title="Liturgical Items"
               src="https://www.youtube.com/embed/57CrxPpe-Es?si=iZEnMAvVeta7s-2e"
@@ -80,24 +71,6 @@ const HomePage: React.FC<HomePageProps> = ({ liturgyData }) => {
           <Heading as="h2" size="lg" mb={4} textAlign={"center"}>
             {formatDate(new Date())}
           </Heading>
-          {/* Directly render liturgical data in your component */}
-          {liturgyData && (
-            <Stack spacing={4} textAlign="center">
-              {liturgyData.celebrations.map(
-                (celebration: any, index: number) => (
-                  <div key={index}>
-                    <Heading as="h3" size="md">
-                      Celebration: {celebration.title}
-                    </Heading>
-                    <Text>
-                      Color: {celebration.colour}, Liturgical Day Rank:{" "}
-                      {celebration.rank}
-                    </Text>
-                  </div>
-                )
-              )}
-            </Stack>
-          )}
           <ChecklistIndex />
         </Container>
       </Box>
