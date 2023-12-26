@@ -9,10 +9,12 @@ const fetchLiturgyData = async (date: string) => {
       throw new Error('Failed to fetch data');
     }
 
+    
+
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching liturgy data:', error);
+    console.error('Error fetching liturgy data for liturgy.day API:', error);
     throw error; // Rethrow the error for the component to handle
   }
 };

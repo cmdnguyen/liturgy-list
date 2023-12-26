@@ -20,7 +20,7 @@ export const useLiturgyData = () => {
         const season = data.season || "";
         setLiturgicalSeason(season.toLowerCase());
       } catch (error) {
-        console.error("Error fetching liturgy data:", error);
+        console.error("Error fetching liturgy data from liturgy.day:", error);
       }
     };
 
@@ -40,7 +40,7 @@ export const useLiturgyData = () => {
       case "ordinary time":
         return "green";
       default:
-        return "red";
+        return "blue";
     }
   };
 
