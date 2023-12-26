@@ -33,7 +33,7 @@ const LiturgyData = () => {
         const result = await response.json();
         setData(result);
       } catch (error) {
-        console.error('Error fetching data:', error as Error);
+        console.error('Error fetching data from calpi:', error as Error);
         // You might want to set an error state here if needed.
       }
     };
