@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import fetchLiturgyData from "./liturgyAPI";
+import axios from "axios";
 
 export const useLiturgyData = () => {
   const [liturgyData, setLiturgyData] = useState<any>(null);
@@ -14,13 +14,16 @@ export const useLiturgyData = () => {
         const day = currentDate.getDate().toString().padStart(2, "0");
         const formattedDate = `${year}-${month}-${day}`;
 
-        const data = await fetchLiturgyData(formattedDate);
+        const apiUrl = `https://liturgy-checklist.vercel.app/api/liturgyCalendar?year=${year}&month=${month}&day=${day}`;
+        const response = await axios.get(apiUrl);
+        const data = response.data;
+
         setLiturgyData(data);
 
         const season = data.season || "";
         setLiturgicalSeason(season.toLowerCase());
       } catch (error) {
-        console.error("Error fetching liturgy data from liturgy.day:", error);
+        console.error("Error fetching liturgy data from calAPI:", error);
       }
     };
 
