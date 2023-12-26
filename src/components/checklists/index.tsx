@@ -18,7 +18,7 @@ import { useLiturgyData } from "../../utils/liturgyColorHelper";
 const ChecklistIndex: React.FC = () => {
   const [isFinishModalOpen, setIsFinishModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("mass");
-  const { liturgyData, liturgicalSeason, getColorScheme } = useLiturgyData();
+  const { liturgyData, liturgicalSeason, colorScheme } = useLiturgyData();
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
 
   const handleFinishButtonClick = () => {
@@ -59,7 +59,7 @@ const ChecklistIndex: React.FC = () => {
 
       <Button
         mt={10}
-        colorScheme={getColorScheme()}
+        colorScheme={colorScheme}
         onClick={handleFinishButtonClick}
         display={"block"}
         mx={useBreakpointValue({ base: "0 auto", md: "auto" })}
@@ -76,7 +76,7 @@ const ChecklistIndex: React.FC = () => {
           </ModalBody>
           <ModalFooter>
             <Button
-              colorScheme={getColorScheme()}
+              colorScheme={colorScheme}
               onClick={handleCloseFinishModal}
 
             >

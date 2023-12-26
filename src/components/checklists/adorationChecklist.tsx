@@ -23,7 +23,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
   const handleCheckboxChange = (values: string[]) => {
     setCheckedValues(values);
   };
-  const { liturgyData, liturgicalSeason, getColorScheme } = useLiturgyData();
+  const { liturgyData, liturgicalSeason, colorScheme } = useLiturgyData();
   const [isScarfOffering, setIsScarfOffering] = useState(false);
 
   const peopleItems = [{ value: "Lector" }, { value: "Altar Servers" }];
@@ -133,7 +133,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
         <Switch
           id="scarfOffering"
           onChange={() => setIsScarfOffering(!isScarfOffering)}
-          colorScheme={getColorScheme()}
+          colorScheme={colorScheme}
         />
       </FormControl>
 
@@ -147,7 +147,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
         <ChecklistGroup
           title="People"
           items={peopleItems}
-          colorScheme={getColorScheme()}
+          colorScheme={colorScheme}
           onChange={handleCheckboxChange}
           checkedValues={checkedValues}
         />
@@ -155,7 +155,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
         <ChecklistGroup
           title="Incense/Xông Hương"
           items={incenseItems}
-          colorScheme={getColorScheme()}
+          colorScheme={colorScheme}
           onChange={handleCheckboxChange}
           checkedValues={checkedValues}
         />
@@ -163,7 +163,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
         <ChecklistGroup
           title="Vestments"
           items={vestmentItems}
-          colorScheme={getColorScheme()}
+          colorScheme={colorScheme}
           onChange={handleCheckboxChange}
           checkedValues={checkedValues}
         />
@@ -171,7 +171,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
         <ChecklistGroup
           title="Vessels"
           items={vesselItems}
-          colorScheme={getColorScheme()}
+          colorScheme={colorScheme}
           onChange={handleCheckboxChange}
           checkedValues={checkedValues}
         />
@@ -180,7 +180,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
           <ChecklistGroup
             title="Scarf Offering/Dâng Khăn"
             items={scarfOfferingItems}
-            colorScheme={getColorScheme()}
+            colorScheme={colorScheme}
             onChange={handleCheckboxChange}
             checkedValues={checkedValues}
           />

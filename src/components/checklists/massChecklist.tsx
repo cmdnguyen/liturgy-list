@@ -25,7 +25,7 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
   };
   const [isScarfOffering, setIsScarfOffering] = useState(false);
   // const [isSunday, setIsSunday] = useState(false);
-  const { liturgyData, liturgicalSeason, getColorScheme } = useLiturgyData();
+  const { liturgyData, liturgicalSeason, colorScheme } = useLiturgyData();
 
   const peopleItems = [
     { value: "Lector" },
@@ -188,7 +188,7 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
         <Switch
           id="scarfOffering"
           onChange={() => setIsScarfOffering(!isScarfOffering)}
-          colorScheme={getColorScheme()}
+          colorScheme={colorScheme}
         />
       </FormControl>
 
@@ -202,7 +202,7 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
         <ChecklistGroup
           title="People"
           items={peopleItems}
-          colorScheme={getColorScheme()}
+          colorScheme={colorScheme}
           onChange={handleCheckboxChange}
           checkedValues={checkedValues}
         />
@@ -210,7 +210,7 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
         <ChecklistGroup
           title="Liturgical Books/ Sách Phụng Vụ"
           items={liturgicalBooksItems}
-          colorScheme={getColorScheme()}
+          colorScheme={colorScheme}
           onChange={handleCheckboxChange}
           checkedValues={checkedValues}
         />
@@ -218,7 +218,7 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
         <ChecklistGroup
           title="Vessels"
           items={vesselsItems}
-          colorScheme={getColorScheme()}
+          colorScheme={colorScheme}
           onChange={handleCheckboxChange}
           checkedValues={checkedValues}
         />
@@ -227,7 +227,7 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
           <ChecklistGroup
             title="Scarf Offering/Dâng Khăn"
             items={scarfOfferingItems}
-            colorScheme={getColorScheme()}
+            colorScheme={colorScheme}
             onChange={handleCheckboxChange}
             checkedValues={checkedValues}
           />

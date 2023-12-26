@@ -84,28 +84,5 @@ function HomePage() {
   );
 };
 
-export async function getServerSideProps() {
-  try {
-    // Fetch data from the API endpoint using the environment variable
-    const res = await fetch(process.env.NEXT_PUBLIC_API_URL || "");
-    const liturgyData = await res.json();
-
-    // console.log("Fetched liturgyData:", liturgyData); // Log fetched data
-
-    return {
-      props: {
-        liturgyData,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        liturgyData: null,
-      },
-    };
-  }
-}
-
 
 export default HomePage;
