@@ -1,13 +1,18 @@
 // pages/api/dailyReadings.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getCatholicDailyReadings, DailyReadings, Reading } from 'get-catholic-daily-readings';
+import puppeteer from 'puppeteer';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
+    const browser = await puppeteer.launch({ headless: true });
+
     // Customize the API request based on your logic (in this case, using the current date)
     const currentDate = new Date();
     const readings: DailyReadings = await getCatholicDailyReadings(currentDate);
 
+
+    await browser.close();
     // // Accessing individual readings
     // readings.readings.forEach((reading: Reading) => {
     //   console.log('Header:', reading.header);
