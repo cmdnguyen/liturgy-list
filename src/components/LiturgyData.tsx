@@ -44,7 +44,7 @@ const LiturgyData = () => {
         {data ? (
           <Box textAlign="center">
             <List mt={4}>
-              <Heading as="h2" size="lg">Celebration for Today</Heading>
+              <Heading as="h2" size="lg">Celebration for Today:</Heading>
               {data.celebrations.map((celebration, index) => (
                 <ListItem key={index} mb={4}>
                   <Heading as="h3" size="md">{celebration.title}</Heading>
