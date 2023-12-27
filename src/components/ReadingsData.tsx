@@ -9,31 +9,33 @@ interface Reading {
   formattedText: string;
 }
 
+interface ApiResponse {
+  readings: {
+    readings: Reading[];
+  };
+}
+
 const ReadingsData = () => {
-  const [readings, setReadings] = useState<Reading[]>([]);
+  const [readings, setReadings] = useState<Reading[] | null>(null);
 
   useEffect(() => {
-    const fetchReadings = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('api/dailyReadings');
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-
-        const data = await response.json();
-        setReadings(data.readings.readings); // Corrected access to readings array
+        const response = await fetch('/api/dailyReadings');
+        const result: ApiResponse = await response.json();
+        setReadings(result.readings.readings); // Update based on your API response structure
       } catch (error) {
-        console.error('Error fetching readings:', error);
+        console.error('Error fetching data from API:', error);
       }
     };
 
-    fetchReadings();
+    fetchData();
   }, []);
 
   return (
     <Center>
       <Box p={1}>
-        {Array.isArray(readings) && readings.length > 0 ? (
+        {readings !== null && readings.length > 0 ? (
           <Box textAlign="center">
             <List mt={4}>
               {readings.map((reading, index) => (
