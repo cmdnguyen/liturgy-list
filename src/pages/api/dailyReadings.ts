@@ -20,6 +20,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(200).json({ readings });
   } catch (error) {
     console.error('Error fetching daily readings:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 }
