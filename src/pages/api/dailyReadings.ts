@@ -8,6 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const browser = await puppeteer.launch({
       executablePath: puppeteer.executablePath(),
+      args: ['--no-sandbox'],
     });
     const page = await browser.newPage();
     // Customize the API request based on your logic (in this case, using the current date)
