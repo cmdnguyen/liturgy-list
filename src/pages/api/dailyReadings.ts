@@ -8,8 +8,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const readings: DailyReadings = await getCatholicDailyReadings(currentDate);
 
     res.status(200).json({ readings });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching daily readings:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 }
