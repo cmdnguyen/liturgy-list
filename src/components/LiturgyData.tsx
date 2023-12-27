@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { Box, Heading, Text, List, ListItem, Center } from "@chakra-ui/react";
-import Head from "next/head";
 
 interface LiturgyData {
   celebrations: Celebration[];
@@ -44,11 +43,11 @@ const LiturgyData = () => {
       <Box p={1}>
         {data ? (
           <Box textAlign="center">
-            <List>
-                <Heading>Today's Celebration</Heading>
+            <List mt={4}>
+              <Heading as="h2" size="lg">Celebration for Today</Heading>
               {data.celebrations.map((celebration, index) => (
-                <ListItem key={index} mt={2}>
-                  <Heading>{celebration.title}</Heading>
+                <ListItem key={index} mb={4}>
+                  <Heading as="h3" size="md">{celebration.title}</Heading>
                   <Text>Color: {celebration.colour}</Text>
                   <Text>Rank: {celebration.rank}</Text>
 
