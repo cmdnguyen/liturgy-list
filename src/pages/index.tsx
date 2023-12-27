@@ -14,6 +14,7 @@ import { useState } from "react";
 import Hero from "../components/Hero";
 import ChecklistIndex from "../components/checklists/index";
 import LiturgyData  from "../components/LiturgyData";
+import ReadingsData from "../components/ReadingsData";
 
 function HomePage() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -79,6 +80,7 @@ function HomePage() {
           <LiturgyData />
           <ChecklistIndex />
         </Container>
+        <ReadingsData />
       </Box>
     </>
   );

@@ -1,4 +1,4 @@
-// api/liturgyCalendar.ts
+// pages/api/liturgyCalendar.ts
 
 import axios from 'axios';
 import cors from 'cors';
