@@ -37,7 +37,7 @@ const ReadingsData = () => {
     <Center>
         {readings !== null && readings.length > 0 ? (
           <Box textAlign="center">
-            <Heading as="h2" size="lg" mt={10} mb={4}>Readings for Today </Heading>
+            <Heading as="h2" size="lg" my={4}>Readings for Today </Heading>
             <List mt={4}>
               {readings.map((reading, index) => (
                 <ListItem key={index} mb={4}>

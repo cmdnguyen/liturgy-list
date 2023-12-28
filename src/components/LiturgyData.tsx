@@ -14,14 +14,14 @@ interface Celebration {
 }
 
 const LiturgyData = () => {
-  const [data, setData] = useState<LiturgyData | null>(null); // Update the type of data
+  const [data, setData] = useState<LiturgyData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const currentDate = new Date();
         const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1; // Months are zero-indexed
+        const month = currentDate.getMonth() + 1;
         const day = currentDate.getDate();
 
         const response = await fetch(
@@ -31,7 +31,6 @@ const LiturgyData = () => {
         setData(result);
       } catch (error) {
         console.error("Error fetching data from calpi:", error as Error);
-        // You might want to set an error state here if needed.
       }
     };
 
@@ -44,7 +43,7 @@ const LiturgyData = () => {
         {data ? (
           <Box textAlign="center">
             <List mt={4}>
-              <Heading as="h2" size="lg">Celebration for Today:</Heading>
+              <Heading as="h2" size="lg" mb={2}>Celebration for Today:</Heading>
               {data.celebrations.map((celebration, index) => (
                 <ListItem key={index} mb={4}>
                   <Heading as="h3" size="md">{celebration.title}</Heading>

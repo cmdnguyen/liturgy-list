@@ -47,13 +47,10 @@ const ChecklistIndex: React.FC = () => {
       </Select>
 
       {selectedOption === "mass" && (
-        <>
-        <Divider orientation='horizontal' />
         <MassChecklist
           checkedValues={checkedValues}
           setCheckedValues={setCheckedValues}
         />
-        </>
       )}
       {selectedOption === "adoration" && (
         <AdorationChecklist
@@ -72,7 +69,10 @@ const ChecklistIndex: React.FC = () => {
         Finish
       </Button>
       {selectedOption === "mass" && (
+        <>
+        <Divider mt={5}/>
         <ReadingsData />
+        </>
       )}
       <Modal isOpen={isFinishModalOpen} onClose={handleCloseFinishModal}>
         <ModalOverlay />
