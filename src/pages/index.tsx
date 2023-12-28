@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Box,
   Container,
@@ -9,23 +9,14 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { useState } from "react";
-
 import Hero from "../components/Hero";
 import ChecklistIndex from "../components/checklists/index";
 import LiturgyData  from "../components/LiturgyData";
-import ReadingsData from "../components/ReadingsData";
 
 function HomePage() {
-  const [currentDate, setCurrentDate] = useState(new Date());
+
 
   const formatDate = (date: Date) => {
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
     return date.toLocaleDateString("en-US", {
       weekday: "long",
       year: "numeric",
@@ -80,7 +71,6 @@ function HomePage() {
           <LiturgyData />
           <ChecklistIndex />
         </Container>
-        <ReadingsData />
       </Box>
     </>
   );

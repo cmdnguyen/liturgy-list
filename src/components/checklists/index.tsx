@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Modal,
@@ -9,11 +9,13 @@ import {
   ModalFooter,
   Select,
   useBreakpointValue,
+  Divider,
 } from "@chakra-ui/react";
 
 import MassChecklist from "./massChecklist";
 import AdorationChecklist from "./adorationChecklist";
 import { useLiturgyData } from "../../utils/liturgyColorHelper";
+import ReadingsData from "../ReadingsData";
 
 const ChecklistIndex: React.FC = () => {
   const [isFinishModalOpen, setIsFinishModalOpen] = useState(false);
@@ -45,10 +47,13 @@ const ChecklistIndex: React.FC = () => {
       </Select>
 
       {selectedOption === "mass" && (
+        <>
+        <Divider orientation='horizontal' />
         <MassChecklist
           checkedValues={checkedValues}
           setCheckedValues={setCheckedValues}
         />
+        </>
       )}
       {selectedOption === "adoration" && (
         <AdorationChecklist
@@ -66,7 +71,9 @@ const ChecklistIndex: React.FC = () => {
       >
         Finish
       </Button>
-
+      {selectedOption === "mass" && (
+        <ReadingsData />
+      )}
       <Modal isOpen={isFinishModalOpen} onClose={handleCloseFinishModal}>
         <ModalOverlay />
         <ModalContent>

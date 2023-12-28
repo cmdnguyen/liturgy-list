@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/pages/api/dailyReadings.ts"
+    "src/pages/api/dailyReadingsEng.ts"
   ],
   "exclude": ["node_modules"]
 }
