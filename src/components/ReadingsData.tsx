@@ -1,7 +1,18 @@
 // components/ReadingsData.tsx
-import { Box, Heading, Text, List, ListItem, Center, Container } from '@chakra-ui/react';
-import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import {
+  Box,
+  Heading,
+  Text,
+  List,
+  ListItem,
+  Center,
+  Container,
+  Link,
+  VStack
+} from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import React, { useEffect, useState } from "react";
+import { formatShortDate } from "@/utils/dateFormat";
 
 interface Reading {
   header: string;
@@ -17,15 +28,16 @@ interface ApiResponse {
 
 const ReadingsData = () => {
   const [readings, setReadings] = useState<Reading[] | null>(null);
+  const formattedDate = formatShortDate(new Date());
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/dailyReadingsEng');
+        const response = await fetch("/api/dailyReadingsEng");
         const result: ApiResponse = await response.json();
-        setReadings(result.readings.readings); // Update based on your API response structure
+        setReadings(result.readings.readings);
       } catch (error) {
-        console.error('Error fetching data from API:', error);
+        console.error("Error fetching data from API:", error);
       }
     };
 
@@ -34,10 +46,21 @@ const ReadingsData = () => {
 
   return (
     <Container maxW="container.lg">
-    <Center>
+      <Center>
         {readings !== null && readings.length > 0 ? (
           <Box textAlign="center">
-            <Heading as="h2" size="lg" my={4}>Readings for Today </Heading>
+
+            <Heading as="h2" size="lg" my={4}>
+              Readings for {formattedDate}{" "}
+            </Heading>
+            <VStack>
+            <Link href="https://bible.usccb.org/" isExternal>
+              Readings from USCCB <ExternalLinkIcon mx="2px" />
+            </Link>
+            <Link href="https://thanhlinh.net/lich-loi-chua/" isExternal>
+              Readings from ThanhLinh <ExternalLinkIcon mx="2px" />
+            </Link>
+            </VStack>
             <List mt={4}>
               {readings.map((reading, index) => (
                 <ListItem key={index} mb={4}>
@@ -53,7 +76,7 @@ const ReadingsData = () => {
         ) : (
           <Text>No readings available.</Text>
         )}
-    </Center>
+      </Center>
     </Container>
   );
 };

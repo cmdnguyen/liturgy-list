@@ -4,10 +4,19 @@ export const getCurrentFormattedDate = (date: Date = new Date(), formatString: s
   return format(date, formatString);
 };
 
-export const getFormattedDateForQuery = (year: number, month: number, day: number): string => {
-    // Ensure month and day are two digits
-    const formattedMonth = month.toString().padStart(2, '0');
-    const formattedDay = day.toString().padStart(2, '0');
-  
-    return `${year}${formattedMonth}${formattedDay}`;
+export const formatFullDate = (date: Date) => {
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  export const formatShortDate = (date: Date) => {
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    });
   };

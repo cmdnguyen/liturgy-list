@@ -13,18 +13,8 @@ import Hero from "../components/Hero";
 import ChecklistIndex from "../components/checklists/index";
 import LiturgyData  from "../components/LiturgyData";
 
+
 function HomePage() {
-
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
   return (
     <>
       <Hero />
@@ -65,9 +55,6 @@ function HomePage() {
           </AspectRatio>
         </Stack>
         <Container maxW={"8xl"} mt={12}>
-          <Heading as="h2" size="lg" mb={4} textAlign={"center"}>
-            {formatDate(new Date())}
-          </Heading>
           <LiturgyData />
           <ChecklistIndex />
         </Container>

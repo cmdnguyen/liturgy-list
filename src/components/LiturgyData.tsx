@@ -1,8 +1,7 @@
 // src/components/LiturgyData.tsx
 import React, { useEffect, useState } from "react";
 import { Box, Heading, Text, List, ListItem, Center } from "@chakra-ui/react";
-
-
+import { formatFullDate } from "@/utils/dateFormat";
 
 interface LiturgyData {
   celebrations: Celebration[];
@@ -16,6 +15,7 @@ interface Celebration {
 
 const LiturgyData = () => {
   const [data, setData] = useState<LiturgyData | null>(null);
+  const formattedDate = formatFullDate(new Date());
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,27 +39,30 @@ const LiturgyData = () => {
   }, []);
 
   return (
-    <Center>
-      <Box p={1}>
-        {data ? (
-          <Box textAlign="center">
-            <List mt={4}>
-              <Heading as="h2" size="lg" mb={2}>Celebration for Today:</Heading>
-              {data.celebrations.map((celebration, index) => (
-                <ListItem key={index} mb={4}>
-                  <Heading as="h3" size="md">{celebration.title}</Heading>
-                  <Text>Color: {celebration.colour}</Text>
-                  <Text>Rank: {celebration.rank}</Text>
-
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-        ) : (
-          <Text>Loading...</Text>
-        )}
-      </Box>
-    </Center>
+      <Center>
+        <Box p={1}>
+          {data ? (
+            <Box textAlign="center">
+              <List mt={4}>
+                <Heading as="h2" size="lg" mb={2}>
+                  Celebration for {formattedDate}:
+                </Heading>
+                {data.celebrations.map((celebration, index) => (
+                  <ListItem key={index} mb={4}>
+                    <Heading as="h3" size="md">
+                      {celebration.title}
+                    </Heading>
+                    <Text>Color: {celebration.colour}</Text>
+                    <Text>Rank: {celebration.rank}</Text>
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          ) : (
+            <Text>Loading...</Text>
+          )}
+        </Box>
+      </Center>
   );
 };
 
