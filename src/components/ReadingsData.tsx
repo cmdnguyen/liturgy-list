@@ -8,7 +8,7 @@ import {
   Center,
   Container,
   Link,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
@@ -33,7 +33,14 @@ const ReadingsData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/dailyReadingsEng");
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        const day = currentDate.getDate();
+
+        const response = await fetch(
+          `/api/dailyReadingsEng?year=${year}&month=${month}&day=${day}`
+        );
         const result: ApiResponse = await response.json();
         setReadings(result.readings.readings);
       } catch (error) {
@@ -53,12 +60,12 @@ const ReadingsData = () => {
               Readings for {formattedDate}{" "}
             </Heading>
             <VStack>
-            <Link href="https://bible.usccb.org/" isExternal>
-              Readings from USCCB <ExternalLinkIcon mx="2px" />
-            </Link>
-            <Link href="https://thanhlinh.net/lich-loi-chua/" isExternal>
-              Readings from ThanhLinh <ExternalLinkIcon mx="2px" />
-            </Link>
+              <Link href="https://bible.usccb.org/" isExternal>
+                Readings from USCCB <ExternalLinkIcon mx="2px" />
+              </Link>
+              <Link href="https://thanhlinh.net/lich-loi-chua/" isExternal>
+                Readings from ThanhLinh <ExternalLinkIcon mx="2px" />
+              </Link>
             </VStack>
             <List mt={4}>
               {readings.map((reading, index) => (
@@ -74,16 +81,16 @@ const ReadingsData = () => {
           </Box>
         ) : (
           <>
-          <Text>No readings available.</Text>
-          <VStack>
-          <Link href="https://bible.usccb.org/" isExternal>
-          Readings from USCCB <ExternalLinkIcon mx="2px" />
-        </Link>
-        <Link href="https://thanhlinh.net/lich-loi-chua/" isExternal>
-          Readings from ThanhLinh <ExternalLinkIcon mx="2px" />
-        </Link>
-        </VStack>
-        </>
+            <VStack>
+              <Text>No readings available.</Text>
+              <Link href="https://bible.usccb.org/" isExternal>
+                Readings from USCCB <ExternalLinkIcon mx="2px" />
+              </Link>
+              <Link href="https://thanhlinh.net/lich-loi-chua/" isExternal>
+                Readings from ThanhLinh <ExternalLinkIcon mx="2px" />
+              </Link>
+            </VStack>
+          </>
         )}
       </Center>
     </Container>
