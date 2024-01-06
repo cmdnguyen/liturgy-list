@@ -1,6 +1,7 @@
 // pages/api/liturgyCalendar.ts
 import axios from 'axios';
 import cors from 'cors';
+import { getCurrentFormattedDate } from '@/utils/dateFormat';
 
 const allowedOrigins = ['http://localhost:3000', 'https://liturgy-checklist.vercel.app'];
 
@@ -28,8 +29,9 @@ export default async function handler(req: any, res: any) {
       resolve();
     });
   });
-  const { year, month, day } = req.query;
-  const cal = 'default'; // Use 'default' as the default value for cal
+
+  const { year, month, day } = req.query || getCurrentFormattedDate(); // Use provided query parameters or get current date
+  const cal = 'default';
   const apiUrl = `http://calapi.inadiutorium.cz/api/v0/en/calendars/${cal}/${year}/${month}/${day}`;
 
   try {

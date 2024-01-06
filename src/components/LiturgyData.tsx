@@ -1,7 +1,8 @@
 // src/components/LiturgyData.tsx
-
 import React, { useEffect, useState } from "react";
 import { Box, Heading, Text, List, ListItem, Center } from "@chakra-ui/react";
+
+
 
 interface LiturgyData {
   celebrations: Celebration[];

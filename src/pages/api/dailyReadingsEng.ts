@@ -2,7 +2,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 import cheerio from 'cheerio';
-import { format } from 'date-fns';
+import { getCurrentFormattedDate } from '@/utils/dateFormat';
 
 interface Reading {
   header: string;
@@ -20,9 +20,9 @@ interface DailyReadings {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const currentDate = new Date();
-    const formattedDate = format(currentDate, 'MMddyy');
+    const formattedDate = getCurrentFormattedDate();
     const url = `https://bible.usccb.org/bible/readings/${formattedDate}.cfm`;
+
 
     const response = await axios.get<string>(url);
     const readings = parseReadings(response.data);
