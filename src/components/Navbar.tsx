@@ -22,8 +22,8 @@ const Links = [
     to: "/",
   },
   {
-    name: "Daily Celebrations",
-    to: "/dailyCelebration",
+    name: "Daily Readings",
+    to: "/dailyReadings",
   },
 ];
 

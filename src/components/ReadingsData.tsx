@@ -32,7 +32,6 @@ interface ReadingsDataProps {
 const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
   const [readings, setReadings] = useState<Reading[] | null>(null);
   const currentDate = selectedDate || new Date();
-  const formattedDate = formatShortDate(currentDate);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,8 +51,7 @@ const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
     };
 
     fetchData();
-  }, [currentDate]); // Add currentDate as a dependency
-
+  }, [currentDate]);
 
   return (
     <Container maxW="container.lg">
@@ -85,13 +83,16 @@ const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
           </Box>
         ) : (
           <>
+            <Heading as="h2" size="lg" my={4}>
+              Readings
+            </Heading>
             <VStack>
               <Text>No readings available.</Text>
               <Link href="https://bible.usccb.org/" isExternal>
-                Readings from USCCB <ExternalLinkIcon mx="2px" />
+                USCCB <ExternalLinkIcon mx="2px" />
               </Link>
               <Link href="https://thanhlinh.net/lich-loi-chua/" isExternal>
-                Readings from ThanhLinh <ExternalLinkIcon mx="2px" />
+                ThanhLinh.net <ExternalLinkIcon mx="2px" />
               </Link>
             </VStack>
           </>
