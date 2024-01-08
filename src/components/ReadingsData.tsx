@@ -65,10 +65,10 @@ const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
             </Heading>
             <VStack>
               <Link href="https://bible.usccb.org/" isExternal>
-                Readings from USCCB <ExternalLinkIcon mx="2px" />
+                USCCB <ExternalLinkIcon mx="2px" />
               </Link>
               <Link href="https://thanhlinh.net/lich-loi-chua/" isExternal>
-                Readings from ThanhLinh <ExternalLinkIcon mx="2px" />
+                ThanhLinh.net <ExternalLinkIcon mx="2px" />
               </Link>
             </VStack>
             <List mt={4}>
