@@ -25,15 +25,18 @@ interface ApiResponse {
     readings: Reading[];
   };
 }
+interface ReadingsDataProps {
+  selectedDate?: Date;
+}
 
-const ReadingsData = () => {
+const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
   const [readings, setReadings] = useState<Reading[] | null>(null);
-  const formattedDate = formatShortDate(new Date());
+  const currentDate = selectedDate || new Date();
+  const formattedDate = formatShortDate(currentDate);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const currentDate = new Date();
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth() + 1;
         const day = currentDate.getDate();
@@ -49,7 +52,8 @@ const ReadingsData = () => {
     };
 
     fetchData();
-  }, []);
+  }, [currentDate]); // Add currentDate as a dependency
+
 
   return (
     <Container maxW="container.lg">
@@ -57,7 +61,7 @@ const ReadingsData = () => {
         {readings !== null && readings.length > 0 ? (
           <Box textAlign="center">
             <Heading as="h2" size="lg" my={4}>
-              Readings for {formattedDate}{" "}
+              Readings
             </Heading>
             <VStack>
               <Link href="https://bible.usccb.org/" isExternal>

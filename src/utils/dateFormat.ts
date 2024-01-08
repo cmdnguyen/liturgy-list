@@ -16,7 +16,6 @@ export const formatFullDate = (date: Date) => {
 
 export const formatShortDate = (date: Date) => {
   return date.toLocaleDateString("en-US", {
-    weekday: "long",
     month: "long",
     day: "numeric",
   });

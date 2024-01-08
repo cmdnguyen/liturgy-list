@@ -31,7 +31,7 @@ export default async function handler(req: any, res: any) {
   });
 
   const { year, month, day } = req.query || getCurrentFormattedDate(); // Use provided query parameters or get current date
-  const cal = 'default';
+  const cal = 'general-en';
   const apiUrl = `http://calapi.inadiutorium.cz/api/v0/en/calendars/${cal}/${year}/${month}/${day}`;
 
   try {

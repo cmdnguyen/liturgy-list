@@ -20,7 +20,8 @@ interface DailyReadings {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const formattedDate = getCurrentFormattedDate();
+    const { date } = req.query;
+    const formattedDate = date ? getCurrentFormattedDate(new Date(date.toString())) : getCurrentFormattedDate();
     const url = `https://bible.usccb.org/bible/readings/${formattedDate}.cfm`;
 
 
