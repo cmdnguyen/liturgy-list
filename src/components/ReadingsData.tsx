@@ -12,12 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
-import { formatShortDate } from "@/utils/dateFormat";
 
 interface Reading {
   header: string;
   reference: string;
   formattedText: string;
+
 }
 
 interface ApiResponse {
@@ -54,14 +54,13 @@ const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
   }, [currentDate]);
 
   return (
-    <Container maxW="container.lg">
-      <Center>
+    <Container maxW="container.lg" minH="300px">
         {readings !== null && readings.length > 0 ? (
-          <Box textAlign="center">
+          <Box textAlign="start">
             <Heading as="h2" size="lg" my={4}>
               Readings
             </Heading>
-            <VStack>
+            <VStack align="left">
               <Link href="https://bible.usccb.org/" isExternal>
                 USCCB <ExternalLinkIcon mx="2px" />
               </Link>
@@ -72,21 +71,25 @@ const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
             <List mt={4}>
               {readings.map((reading, index) => (
                 <ListItem key={index} mb={4}>
-                  <Heading as="h3" size="md">
+                  <Heading as="h3" size="md" mb={1}>
                     {reading.header}
                   </Heading>
-                  <Text>{reading.reference}</Text>
-                  <Text>{reading.formattedText}</Text>
+                  <Heading as="h4" size="sm" mb={1}>
+                    {reading.reference}
+                  </Heading>
+                  <Text style={{ whiteSpace: "pre-line" }}>
+                    {reading.formattedText}
+                  </Text>
                 </ListItem>
               ))}
             </List>
           </Box>
         ) : (
-          <>
+          <Box textAlign={"left"}>
             <Heading as="h2" size="lg" my={4}>
               Readings
             </Heading>
-            <VStack>
+            <VStack align="left">
               <Text>No readings available.</Text>
               <Link href="https://bible.usccb.org/" isExternal>
                 USCCB <ExternalLinkIcon mx="2px" />
@@ -95,9 +98,9 @@ const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
                 ThanhLinh.net <ExternalLinkIcon mx="2px" />
               </Link>
             </VStack>
-          </>
+          </Box>
         )}
-      </Center>
+    
     </Container>
   );
 };

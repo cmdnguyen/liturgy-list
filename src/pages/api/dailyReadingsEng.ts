@@ -8,7 +8,6 @@ interface Reading {
   header: string;
   reference: string;
   rawText: string;
-  nonFormattedText: string;
   formattedText: string;
 }
 
@@ -48,14 +47,21 @@ function parseReadings(html: string): DailyReadings {
     const reference = $(element).find('div.address a').text().trim();
     const rawText = $(element).find('div.content-body').html()?.replace(/\&nbsp;/g, '').trim() || '';
 
-    // Additional formatting if needed
-    const formattedText = rawText.replace(/<br\s*[/]?>/gi, '\n').replace(/<[^>]*>/g, '');
+    let replaced = false;
+    const formattedText = rawText.replace(/<[^>]*>/g, () => {
+      if (!replaced) {
+        replaced = true;
+        return '\n';
+      } else {
+        return ' ';
+      }
+    });
+
 
     return {
       header,
       reference,
       rawText,
-      nonFormattedText: rawText.replace(/<br\s*[/]?>/gi, ' '),
       formattedText,
     };
   }).get();
