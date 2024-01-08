@@ -39,7 +39,7 @@ const ReadingsData = () => {
         const day = currentDate.getDate();
 
         const response = await fetch(
-          `/api/dailyReadingsEng?year=${year}&month=${month}&day=${day}`
+          `/api/dailyReadingsEng?date=${year}-${month}-${day}`
         );
         const result: ApiResponse = await response.json();
         setReadings(result.readings.readings);
