@@ -5,7 +5,6 @@ import {
   Text,
   List,
   ListItem,
-  Center,
   Container,
   Link,
   VStack,

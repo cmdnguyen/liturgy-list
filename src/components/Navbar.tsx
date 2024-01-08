@@ -9,8 +9,6 @@ import {
   Heading,
   Image,
   useDisclosure,
-  Collapse,
-  useColorModeValue,
   Drawer,
   DrawerOverlay,
   DrawerContent,
