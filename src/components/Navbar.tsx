@@ -11,10 +11,16 @@ import {
   useDisclosure,
   Collapse,
   useColorModeValue,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
-import { useState } from "react";
+import { useRef, useEffect } from "react";
 
 const Links = [
   {
@@ -26,7 +32,6 @@ const Links = [
     to: "/dailyReadings",
   },
 ];
-
 const NavItem = ({
   to,
   children,
@@ -34,13 +39,28 @@ const NavItem = ({
   to: string;
   children: React.ReactNode;
 }) => (
-  <Box key={to} px={2} py={1}>
-    <Link as={NextLink} href={to} _hover={{ textDecoration: "none" }}>
+  <Box
+    key={to}
+    px={2}
+    py={1}
+    style={{ textDecoration: "none" }}
+    _focus={{ boxShadow: "none" }}
+  >
+    <Link
+      as={NextLink}
+      href={to}
+      p="2"
+      mx="1"
+      borderRadius="lg"
+      _hover={{
+        bg: "blue.500",
+        color: "white",
+      }}
+    >
       {children}
     </Link>
   </Box>
 );
-
 const DesktopNav = () => (
   <>
     {Links.map((link) => (
@@ -51,32 +71,58 @@ const DesktopNav = () => (
   </>
 );
 
-const MobileNav = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void }) => (
-  <>
-    <IconButton
-      onClick={onToggle}
-      icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-      variant={"ghost"}
-      aria-label={"Toggle Navigation"}
-    />
-    <Collapse in={isOpen} animateOpacity>
-      <Box mt={2} pl={4} borderLeft={1} borderStyle={"solid"} borderColor={useColorModeValue("gray.200", "gray.700")}>
-        {Links.map((link) => (
-          <NavItem key={link.to} to={link.to}>
-            {link.name}
-          </NavItem>
-        ))}
-      </Box>
-    </Collapse>
-  </>
-);
+const MobileNav = ({
+  isOpen,
+  onToggle,
+}: {
+  isOpen: boolean;
+  onToggle: () => void;
+}) => {
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (isOpen && sidebarRef.current) {
+      sidebarRef.current.focus();
+    }
+  }, [isOpen]);
+
+  return (
+    <>
+      <IconButton
+        onClick={onToggle}
+        icon={
+          isOpen ? <CloseIcon w={5} h={5} /> : <HamburgerIcon w={5} h={5} />
+        }
+        variant={"ghost"}
+        aria-label={"Toggle Navigation"}
+      />
+      <Drawer placement="left" onClose={onToggle} isOpen={isOpen}>
+        <DrawerOverlay>
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader>Navigation</DrawerHeader>
+            <DrawerBody>
+              {Links.map((link) => (
+                <NavItem key={link.to} to={link.to}>
+                  {link.name}
+                </NavItem>
+              ))}
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+    </>
+  );
+};
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const headingText = useBreakpointValue({ base: "Liturgy", md: "VEYM Liturgy" });
+  const headingText = useBreakpointValue({
+    base: "Liturgy",
+    md: "VEYM Liturgy",
+  });
 
   return (
     <Box>
@@ -91,6 +137,10 @@ export default function Navbar() {
         align={"center"}
       >
         <Flex flex={{ base: 1 }} justify={"start"}>
+          {isMobile && (
+            // Render MobileNav if it's a mobile view
+            <MobileNav isOpen={isOpen} onToggle={onToggle} />
+          )}
           <Link as={NextLink} href="/" _hover={{ textDecoration: "none" }}>
             <Flex align="center">
               <Image
@@ -98,7 +148,9 @@ export default function Navbar() {
                 alt="TNTT-Logo"
                 width={useBreakpointValue({ base: "70px", md: "90px" })}
               />
-              <Heading textAlign={useBreakpointValue({ base: "center", md: "left" })}>
+              <Heading
+                textAlign={useBreakpointValue({ base: "center", md: "left" })}
+              >
                 {headingText}
               </Heading>
             </Flex>
@@ -110,14 +162,11 @@ export default function Navbar() {
           {colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
         </Button>
         <Flex display={{ base: "flex", md: "flex" }}>
-          {isMobile ? (
-            <MobileNav isOpen={isOpen} onToggle={onToggle} />
-          ) : (
+          {!isMobile && (
+            // Render DesktopNav if it's not a mobile view
             <DesktopNav />
           )}
         </Flex>
-
-
       </Flex>
     </Box>
   );
