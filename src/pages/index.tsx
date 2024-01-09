@@ -48,7 +48,7 @@ function HomePage() {
             The checklist is based on the items you see in Mass and Adoration.
             Not all are needed.
             <br />
-            Please check with your chaplain on what is needed for your mass in
+            Please check with your chaplain on what is needed for mass in
             your chapter or league of chapters.
             <br />
             There is a button that describes the item and shows what it
