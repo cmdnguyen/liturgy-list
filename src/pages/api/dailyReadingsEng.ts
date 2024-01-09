@@ -12,7 +12,7 @@ interface Reading {
 }
 
 interface DailyReadings {
-  header: string;
+  celebration: string;
   lectionary: number;
   readings: Reading[];
 }
@@ -25,9 +25,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
     const response = await axios.get<string>(url);
-    const readings = parseReadings(response.data);
+    const readingData = parseReadings(response.data);
 
-    res.status(200).json({ readings });
+    res.status(200).json({ readingData });
   } catch (error: any) {
     console.error('Error fetching daily readings:', error);
     res.status(500).json({ error: 'Internal Server Error', details: error.message });
@@ -67,7 +67,7 @@ function parseReadings(html: string): DailyReadings {
   }).get();
 
   return {
-    header: lectionaryHeader,
+    celebration: lectionaryHeader,
     lectionary: lectionaryNumber,
     readings,
   };

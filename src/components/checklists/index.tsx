@@ -92,7 +92,7 @@ const ChecklistIndex: React.FC = () => {
           </Flex>
           <Flex flexDirection="row" alignItems="center">
             <FormLabel htmlFor="languageSwitch">
-              {isVietnamese ? "Switch to English" : "Chuyển sang Tiếng Việt"}
+              {isVietnamese ? "English" : "Tiếng Việt"}
             </FormLabel>
             <Switch
               id="languageSwitch"

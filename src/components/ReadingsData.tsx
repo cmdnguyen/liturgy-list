@@ -16,11 +16,10 @@ interface Reading {
   header: string;
   reference: string;
   formattedText: string;
-
 }
 
 interface ApiResponse {
-  readings: {
+  readingData: {
     readings: Reading[];
   };
 }
@@ -43,7 +42,7 @@ const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
           `/api/dailyReadingsEng?date=${year}-${month}-${day}`
         );
         const result: ApiResponse = await response.json();
-        setReadings(result.readings.readings);
+        setReadings(result.readingData.readings);
       } catch (error) {
         console.error("Error fetching data from API:", error);
       }
@@ -54,11 +53,12 @@ const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
 
   return (
     <Container maxW="container.lg" minH="300px">
+      <Box textAlign="start">
+        <Heading as="h2" size="lg" my={4}>
+          Readings
+        </Heading>
         {readings !== null && readings.length > 0 ? (
-          <Box textAlign="start">
-            <Heading as="h2" size="lg" my={4}>
-              Readings
-            </Heading>
+          <>
             <VStack align="left">
               <Link href="https://bible.usccb.org/" isExternal>
                 USCCB <ExternalLinkIcon mx="2px" />
@@ -82,14 +82,12 @@ const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
                 </ListItem>
               ))}
             </List>
-          </Box>
+          </>
         ) : (
-          <Box textAlign={"left"}>
-            <Heading as="h2" size="lg" my={4}>
-              Readings
-            </Heading>
+          <>
             <VStack align="left">
-              <Text>No readings available.</Text>
+              <Heading as="p" size="sm">Reading Data is unavailable. </Heading>
+              <Heading as="p" size="sm">Please click on the links below to find the readings by the date:</Heading>
               <Link href="https://bible.usccb.org/" isExternal>
                 USCCB <ExternalLinkIcon mx="2px" />
               </Link>
@@ -97,9 +95,9 @@ const ReadingsData: React.FC<ReadingsDataProps> = ({ selectedDate }) => {
                 ThanhLinh.net <ExternalLinkIcon mx="2px" />
               </Link>
             </VStack>
-          </Box>
+          </>
         )}
-    
+      </Box>
     </Container>
   );
 };

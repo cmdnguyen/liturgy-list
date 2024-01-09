@@ -114,7 +114,7 @@ const ChecklistGroup: React.FC<ChecklistGroupProps> = ({
               </ModalBody>
               <ModalFooter>
                 <Button colorScheme={colorScheme} onClick={handleCloseModal}>
-                  Close
+                  {isVietnamese ? "Đóng" : "Close"}
                 </Button>
               </ModalFooter>
             </ModalContent>
