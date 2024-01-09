@@ -1,3 +1,4 @@
+// checklistGroup.tsx
 import React, { useState } from "react";
 import {
   Checkbox,
@@ -18,7 +19,8 @@ import {
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 
 interface ChecklistItem {
-  value: string;
+  engName: string;
+  vietName?: string;
   description?: string;
   imageSrc?: string;
   sundayOnly?: boolean;
@@ -26,18 +28,22 @@ interface ChecklistItem {
 
 interface ChecklistGroupProps {
   title: string;
+  vietTitle?: string;
   items: ChecklistItem[];
   colorScheme: string;
   onChange: (values: string[]) => void;
   checkedValues: string[];
+  isVietnamese: boolean; // Pass isVietnamese as a prop
 }
 
 const ChecklistGroup: React.FC<ChecklistGroupProps> = ({
   title,
+  vietTitle,
   items,
   colorScheme,
   onChange,
   checkedValues,
+  isVietnamese,
 }) => {
   const [selectedItem, setSelectedItem] = useState<ChecklistItem | null>(null);
 
@@ -60,11 +66,11 @@ const ChecklistGroup: React.FC<ChecklistGroupProps> = ({
     <>
       <Stack pl={useBreakpointValue({ base: 0, md: 6 })} spacing={1}>
         <Heading as="h3" size="lg" mt={useBreakpointValue({ base: 10, md: 1 })}>
-          {title}
+          {isVietnamese && vietTitle ? vietTitle : title}
         </Heading>
         {items.map((item) => (
           <div
-            key={item.value}
+            key={item.engName}
             style={{
               display: "flex",
               alignItems: "center",
@@ -72,11 +78,11 @@ const ChecklistGroup: React.FC<ChecklistGroupProps> = ({
           >
             <Checkbox
               colorScheme={colorScheme}
-              value={item.value}
-              isChecked={checkedValues.includes(item.value)}
-              onChange={() => handleCheckboxChange(item.value)}
+              value={item.engName}
+              isChecked={checkedValues.includes(item.engName)}
+              onChange={() => handleCheckboxChange(item.engName)}
             >
-              {item.value}
+              {isVietnamese && item.vietName ? item.vietName : item.engName}
             </Checkbox>
             {(item.description || item.imageSrc) && (
               <Button
@@ -95,10 +101,14 @@ const ChecklistGroup: React.FC<ChecklistGroupProps> = ({
           <Modal isOpen={!!selectedItem} onClose={handleCloseModal}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>{selectedItem.value}</ModalHeader>
+              <ModalHeader>
+                {isVietnamese && selectedItem.vietName
+                  ? selectedItem.vietName
+                  : selectedItem.engName}
+              </ModalHeader>
               <ModalBody>
                 {selectedItem.imageSrc && (
-                  <Image src={selectedItem.imageSrc} alt={selectedItem.value} />
+                  <Image src={selectedItem.imageSrc} alt={selectedItem.engName} />
                 )}
                 {selectedItem.description && <p>{selectedItem.description}</p>}
               </ModalBody>
