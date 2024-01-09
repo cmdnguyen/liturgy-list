@@ -1,3 +1,4 @@
+//components/checklists/adorationChecklist.tsx
 import React, { useState } from "react";
 import {
   Container,
@@ -14,22 +15,27 @@ import { useLiturgyData } from "../../utils/liturgyColorHelper";
 interface AdorationChecklistProps {
   checkedValues: string[];
   setCheckedValues: React.Dispatch<React.SetStateAction<string[]>>;
+  isVietnamese: boolean; 
+  onToggleLanguage: () => void; 
+  isScarfOffering: boolean;
+  onToggleScarfOffering: () => void; 
 }
 
 const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
   checkedValues,
   setCheckedValues,
+  isVietnamese,
+  onToggleLanguage,
+  isScarfOffering,
+  onToggleScarfOffering,
 }) => {
   const handleCheckboxChange = (values: string[]) => {
     setCheckedValues(values);
   };
 
-  const { liturgyData, liturgicalSeason, colorScheme } = useLiturgyData();
-  const [isScarfOffering, setIsScarfOffering] = useState(false);
-  const [isVietnamese, setIsVietnamese] = useState(false);
-  const handleToggleLanguage = () => {
-    setIsVietnamese((prev) => !prev);
-  };
+  const { colorScheme } = useLiturgyData();
+
+
 
   const peopleItems = [{ engName: "Lector" }, { engName: "Altar Servers" }];
 
@@ -169,42 +175,6 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
     },
   ];
   return (
-    <Container maxW={"full"}>
-      <FormControl
-        display={"block-inline-flex"}
-        mt={3}
-        mx={useBreakpointValue({ base: "0 auto", md: "auto" })}
-        width={useBreakpointValue({
-          base: "90%",
-          sm: "50%",
-          md: "45%",
-          lg: "30%",
-        })}
-      >
-        <Flex flexDirection="column">
-          <Flex flexDirection="row" alignItems="center">
-            <FormLabel htmlFor="scarfOffering">
-              {isVietnamese ? "Dâng Khăn" : "Scarf Offering"}
-            </FormLabel>
-            <Switch
-              id="scarfOffering"
-              onChange={() => setIsScarfOffering(!isScarfOffering)}
-              colorScheme={colorScheme}
-            />
-          </Flex>
-          <Flex flexDirection="row" alignItems="center">
-            <FormLabel htmlFor="languageSwitch">
-              {isVietnamese ? "Switch to English": "Chuyển sang Tiếng Việt"}
-            </FormLabel>
-            <Switch
-              id="languageSwitch"
-              onChange={handleToggleLanguage}
-              colorScheme={colorScheme}
-            />
-          </Flex>
-        </Flex>
-      </FormControl>
-
       <Container
         maxW={"full"}
         mt={useBreakpointValue({ base: 0, md: 4 })}
@@ -269,7 +239,6 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
           />
         )}
       </Container>
-    </Container>
   );
 };
 

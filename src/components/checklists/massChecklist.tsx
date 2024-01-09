@@ -1,37 +1,36 @@
-import React, { useState } from "react";
+//comoonents/checklists/massChecklist.tsx
+import React from "react";
 import {
   Container,
-  FormControl,
-  FormLabel,
-  Switch,
   SimpleGrid,
   useBreakpointValue,
-  Flex,
 } from "@chakra-ui/react";
 
 import ChecklistGroup from "./checklistGroup";
 import { useLiturgyData } from "../../utils/liturgyColorHelper";
-import { is } from "cheerio/lib/api/traversing";
 
 interface MassChecklistProps {
   checkedValues: string[];
   setCheckedValues: React.Dispatch<React.SetStateAction<string[]>>;
+  isVietnamese: boolean; 
+  onToggleLanguage: () => void;
+  isScarfOffering: boolean;
+  onToggleScarfOffering: () => void; 
 }
 
 const MassChecklist: React.FC<MassChecklistProps> = ({
   checkedValues,
   setCheckedValues,
+  isVietnamese,
+  isScarfOffering,
 }) => {
   const handleCheckboxChange = (values: string[]) => {
     setCheckedValues(values);
   };
-  const [isScarfOffering, setIsScarfOffering] = useState(false);
-  // const [isSunday, setIsSunday] = useState(false);
-  const { liturgyData, liturgicalSeason, colorScheme } = useLiturgyData();
-  const [isVietnamese, setIsVietnamese] = useState(false);
-  const handleToggleLanguage = () => {
-    setIsVietnamese((prev) => !prev);
-  };
+
+  const { colorScheme } = useLiturgyData();
+
+  
 
   const peopleItems = [
     { engName: "Lector" },
@@ -233,47 +232,6 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
     },
   ];
   return (
-    <Container maxW={"full"}>
-      <FormControl
-        mt={3}
-        mx={useBreakpointValue({ base: "0 auto", md: "auto" })}
-        width={useBreakpointValue({
-          base: "90%",
-          sm: "50%",
-          md: "45%",
-          lg: "30%",
-        })}
-      >
-        <Flex flexDirection="column">
-          <Flex flexDirection="row" alignItems="center">
-            {/* <FormLabel htmlFor="isSunday">Sunday Mass:</FormLabel>
-        <Switch
-          id="isSunday"
-          onChange={() => setIsSunday(!isSunday)}
-          colorScheme={getColorScheme()}
-        /> */}
-            <FormLabel htmlFor="scarfOffering">
-              {isVietnamese ? "Dâng Khăn": "Scarf Offering"}
-            </FormLabel>
-            <Switch
-              id="scarfOffering"
-              onChange={() => setIsScarfOffering(!isScarfOffering)}
-              colorScheme={colorScheme}
-            />
-          </Flex>
-          <Flex flexDirection="row" alignItems="center">
-            <FormLabel htmlFor="languageSwitch">
-              {isVietnamese ? "Switch to English": "Chuyển sang Tiếng Việt"}
-            </FormLabel>
-            <Switch
-              id="languageSwitch"
-              onChange={handleToggleLanguage}
-              colorScheme={colorScheme}
-            />
-          </Flex>
-        </Flex>
-      </FormControl>
-
       <Container
         maxW={"full"}
         mt={useBreakpointValue({ base: 1, md: 4 })}
@@ -329,7 +287,6 @@ const MassChecklist: React.FC<MassChecklistProps> = ({
           />
         )}
       </Container>
-    </Container>
   );
 };
 

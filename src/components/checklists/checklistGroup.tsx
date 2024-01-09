@@ -1,4 +1,4 @@
-// checklistGroup.tsx
+// components/checklists/checklistGroup.tsx
 import React, { useState } from "react";
 import {
   Checkbox,
