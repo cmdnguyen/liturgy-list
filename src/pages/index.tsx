@@ -12,12 +12,20 @@ import {
 import Hero from "../components/Hero";
 import ChecklistIndex from "../components/checklists/index";
 import LiturgyData  from "../components/LiturgyData";
+import DHTTAdoration from "../../public/chaVietMonstrance_dhtt2023.jpg"
 
 
 function HomePage() {
+  const heroText = (
+    <>
+      Thiếu Nhi Thánh Thể
+      <br />
+      Phụng Vụ Checklist
+    </>
+  );
   return (
     <>
-      <Hero />
+      <Hero backgroundImageSrc={DHTTAdoration} heroText={heroText}/>
       <Box
         p={4}
         bg={useColorModeValue("blackAlpha.50", "blackAlpha.300")}

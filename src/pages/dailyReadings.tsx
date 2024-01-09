@@ -13,39 +13,41 @@ import {
 import { CalendarIcon } from "@chakra-ui/icons";
 import LiturgyData from "../components/LiturgyData";
 import ReadingsData from "../components/ReadingsData";
+import Hero from "../components/Hero";
+import DHTTMass from "../../public/mass_dhtt2023.jpg";
 
 export default function DailyCelebration() {
   const [selectedDate, setSelectedDate] = useState(new Date());
-
+  const heroText = "Daily Readings & Celebrations";
   function handleDateChange(date: Date) {
     setSelectedDate(date);
   }
 
   return (
-    <Box as={Container} maxW={"6xl"} textAlign={"center"} m="auto">
-      <Heading as="h3" size="2xl" mb={3}>
-        Daily Readings & Celebrations
-      </Heading>
-      <Text my={3}>Select a date:</Text>
-      <ReactDatePicker
-        selected={selectedDate}
-        onChange={handleDateChange}
-        dateFormat="MM/dd/yyyy"
-        customInput={
-          <InputGroup>
-            <Input
-              type="text"
-              value={selectedDate.toLocaleDateString()}
-              isReadOnly
-            />
-            <InputRightElement>
-              <CalendarIcon color="gray.500" />
-            </InputRightElement>
-          </InputGroup>
-        }
-      />
-      <LiturgyData selectedDate={selectedDate} />
-      <ReadingsData selectedDate={selectedDate} />
-    </Box>
+    <>
+      <Hero backgroundImageSrc={DHTTMass} heroText={heroText} />
+      <Box as={Container} maxW={"6xl"} textAlign={"center"} m="auto">
+        <Heading size="md" my={3}>Select a date:</Heading>
+        <ReactDatePicker
+          selected={selectedDate}
+          onChange={handleDateChange}
+          dateFormat="MM/dd/yyyy"
+          customInput={
+            <InputGroup>
+              <Input
+                type="text"
+                value={selectedDate.toLocaleDateString()}
+                isReadOnly
+              />
+              <InputRightElement>
+                <CalendarIcon color="gray.500" />
+              </InputRightElement>
+            </InputGroup>
+          }
+        />
+        <LiturgyData selectedDate={selectedDate} />
+        <ReadingsData selectedDate={selectedDate} />
+      </Box>
+    </>
   );
 }
