@@ -11,7 +11,7 @@ import {
 import ImageFuture from "next/image";
 import { useState } from "react";
 
-export default function Hero({ backgroundImageSrc, heroText }) {
+export default function Hero({ backgroundImageSrc, heroText }: { backgroundImageSrc: any, heroText: any }) {
   const [heroImageIsReady, setHeroImageIsReady] = useState(false);
 
   return (
