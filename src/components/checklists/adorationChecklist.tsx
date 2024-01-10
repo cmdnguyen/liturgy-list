@@ -163,7 +163,7 @@ const AdorationChecklist: React.FC<AdorationChecklistProps> = ({
         "https://scontent-dfw5-1.xx.fbcdn.net/v/t31.18172-8/10387092_1448115802106054_4868488717816499024_o.jpg?_nc_cat=101&ccb=1-7&_nc_sid=4dc865&_nc_ohc=B2s9x4fUV2UAX9-Izdo&_nc_ht=scontent-dfw5-1.xx&oh=00_AfCZS1zSj6DbqbBXK9MiRzecO3XhE6Hbf-BpHR6XPSOhSw&oe=65ACAC37",
     },
     {
-      engName: "Vase of White Florwers or Candles",
+      engName: "Vase of White Flowers or Candles",
       vietName: "Bình Hoa Trắng hoặc Nến",
     },
     {
