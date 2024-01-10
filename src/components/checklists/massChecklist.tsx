@@ -6,7 +6,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 
-import ChecklistGroup from "./checklistGroup";
+import ChecklistGroup from "./ChecklistGroup";
 import { useLiturgyData } from "../../utils/liturgyColorHelper";
 
 import peopleItems from "./items/mass/people";

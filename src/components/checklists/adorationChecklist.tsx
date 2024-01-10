@@ -5,7 +5,7 @@ import {
   SimpleGrid,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import ChecklistGroup from "./checklistGroup";
+import ChecklistGroup from "./ChecklistGroup";
 import { useLiturgyData } from "../../utils/liturgyColorHelper";
 
 import scarfOfferingItems from "./items/scarfOffering";

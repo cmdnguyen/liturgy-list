@@ -19,8 +19,8 @@ import {
 
 import { LanguageProvider } from "../../context/LanguageContext";
 
-import MassChecklist from "./massChecklist";
-import AdorationChecklist from "./adorationChecklist";
+import MassChecklist from "./MassChecklist";
+import AdorationChecklist from "./AdorationChecklist";
 import { useLiturgyData } from "../../utils/liturgyColorHelper";
 import ReadingsData from "../ReadingsData";
 
