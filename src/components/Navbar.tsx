@@ -33,9 +33,11 @@ const Links = [
 const NavItem = ({
   to,
   children,
+  onToggle,
 }: {
   to: string;
   children: React.ReactNode;
+  onToggle: () => void;
 }) => (
   <Box
     key={to}
@@ -54,6 +56,7 @@ const NavItem = ({
         bg: "blue.500",
         color: "white",
       }}
+      onClick={onToggle}
     >
       {children}
     </Link>
@@ -62,20 +65,14 @@ const NavItem = ({
 const DesktopNav = () => (
   <>
     {Links.map((link) => (
-      <NavItem key={link.to} to={link.to}>
+      <NavItem key={link.to} to={link.to} onToggle={() => {}}>
         {link.name}
       </NavItem>
     ))}
   </>
 );
 
-const MobileNav = ({
-  isOpen,
-  onToggle,
-}: {
-  isOpen: boolean;
-  onToggle: () => void;
-}) => {
+const MobileNav = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void }) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -94,14 +91,14 @@ const MobileNav = ({
         variant={"ghost"}
         aria-label={"Toggle Navigation"}
       />
-      <Drawer placement="left" onClose={onToggle} isOpen={isOpen}>
+      <Drawer placement="left" onClose={onToggle} isOpen={isOpen} finalFocusRef={sidebarRef}>
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
             <DrawerHeader>Navigation</DrawerHeader>
             <DrawerBody>
               {Links.map((link) => (
-                <NavItem key={link.to} to={link.to}>
+                <NavItem key={link.to} to={link.to} onToggle={onToggle}>
                   {link.name}
                 </NavItem>
               ))}
