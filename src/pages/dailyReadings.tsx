@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import {
   Heading,
   Box,
-  Text,
+  Divider,
   Container,
   InputGroup,
   Input,
@@ -46,6 +46,7 @@ export default function DailyCelebration() {
           }
         />
         <LiturgyData selectedDate={selectedDate} />
+        <Divider mt={5} />
         <ReadingsData selectedDate={selectedDate} />
       </Box>
     </>
