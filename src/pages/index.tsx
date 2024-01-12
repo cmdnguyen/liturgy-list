@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import Hero from "../components/Hero";
-import ChecklistIndex from "../components/checklists/checklistIndex";
+import ChecklistIndex from "../components/checklists/index";
 import LiturgyData  from "../components/LiturgyData";
 import DHTTAdoration from "../../public/chaVietMonstrance_dhtt2023.jpg"
 
