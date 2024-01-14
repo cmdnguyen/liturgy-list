@@ -17,9 +17,10 @@ const linenItems = [
       "A towel used by the priest to dry his hands after washing them.",
   },
   {
-    engName: "Pall",
+    engName: "Chalice Pall",
     description:
       "A stiff square white linen cover that is placed over the chalice to prevent anything from falling into it.",
+    imageSrc: "https://churchcandles.com/wp-content/uploads/2023/03/Red-Cross-Chalice-Pall-YS904.jpg"
   },
   {
     engName: "Altar Cloth",
