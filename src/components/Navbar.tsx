@@ -29,6 +29,10 @@ const Links = [
     name: "Daily Readings",
     to: "/dailyReadings",
   },
+  // {
+  //   name: "Mass Prayers",
+  //   to: "/massPrayers",
+  // }
 ];
 const NavItem = ({
   to,
