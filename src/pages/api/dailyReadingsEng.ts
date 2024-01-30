@@ -26,8 +26,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const response = await axios.get<string>(url);
     const readingData = parseReadings(response.data);
+    // Check if readings array is empty
+    if (readingData.readings.length === 0) {
+      const alternativeUrl = `https://bible.usccb.org/bible/readings/${formattedDate}-YearB.cfm`;
+      const alternativeResponse = await axios.get<string>(alternativeUrl);
+      const alternativeReadingData = parseReadings(alternativeResponse.data);
 
-    res.status(200).json({ readingData });
+      res.status(200).json({ readingData: alternativeReadingData });
+    } else {
+      res.status(200).json({ readingData });
+    }
   } catch (error: any) {
     console.error('Error fetching daily readings:', error);
     res.status(500).json({ error: 'Internal Server Error', details: error.message });
