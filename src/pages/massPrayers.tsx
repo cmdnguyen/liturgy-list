@@ -1,38 +1,39 @@
+// pages/massPrayers.tsx
+import React, { useState } from "react";
 import Hero from "../components/Hero";
 import MassImage from "../../public/mass_cap12021.jpg";
-import { Container, Text, Heading, Box } from "@chakra-ui/react";
+import { Container, Heading, Switch, Flex, Text } from "@chakra-ui/react";
+import EnglishPrayers from "../components/prayers/EnglishPrayers";
+import VietnamesePrayers from "../components/prayers/VietnamesePrayers";
 
-export default function AdorationResources() {
+export default function MassPrayers() {
+  const [isVietnamese, setIsVietnamese] = useState(false);
+
+  const handleToggleLanguage = () => {
+    setIsVietnamese((prev) => !prev);
+  };
+
   const heroText = "Prayers used during Mass";
+
   return (
     <>
       <Hero heroText={heroText} backgroundImageSrc={MassImage} />
       <Container maxW="full">
         <Container maxW="2xl" my={4}>
-          <Heading size="lg" my={2}>
-            Mass Prayers
-          </Heading>
-          <Heading size="md" mb={2}>
-            Kinh Trông Cậy
-          </Heading>
-          <Text>
-            Chúng con trông cậy rất thánh Đức Mẹ Chúa Trời, xin chớ chê chớ bỏ
-            lời con nguyện, trong cơn gian nan thiếu thốn, Đức Nữ Đồng Trinh
-            hiển vinh sáng láng hằng chữa chúng con cho khỏi mọi sự dữ, Amen.
-            <br /> <br />
-            Thưa: Lạy rất thánh Trái Tim Đức Chúa Giêsu.
-            <br />
-            Đáp: Thương xót chúng con. <br />
-            Thưa: Lạy Trái Tim cực Thánh cực tịnh Rất Thánh Đức Bà Maria. <br />
-            Đáp: Cầu cho chúng con. <br />
-            Thưa: Lạy Ông thánh Giuse là bạn thanh sạch Đức Bà Maria trọn đời
-            đồng trinh. <br />
-            Đáp: Cầu cho chúng con. <br />
-            Thưa: Các Thánh Tử Vì Đạo nước Việt Nam. <br />
-            Đáp: Cầu cho chúng con. <br />
-            Thưa: Nữ Vương ban sự bằng an. <br />
-            Đáp: Cầu cho chúng con.
-          </Text>
+          <Flex justify="space-between" align="center" mb={4}>
+            <Heading size="lg" my={2}>
+              Mass Prayers
+            </Heading>
+            <Flex align="center">
+              <Text mr={2}>{isVietnamese ? "Tiếng Việt" : "English"}</Text>
+              <Switch
+                isChecked={isVietnamese}
+                onChange={handleToggleLanguage}
+              />
+            </Flex>
+          </Flex>
+
+          {isVietnamese ? <VietnamesePrayers /> : <EnglishPrayers />}
         </Container>
       </Container>
     </>
