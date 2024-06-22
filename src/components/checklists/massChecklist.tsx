@@ -9,11 +9,11 @@ import {
 import ChecklistGroup from "./checklistGroup";
 import { useLiturgyData } from "../../utils/liturgyColorHelper";
 
-import peopleItems from "./items/mass/people";
-import liturgicalBooksItems from "./items/mass/liturgicalBooks";
-import vesselsItems from "./items/mass/vessels";
-import linenItems from "./items/mass/linen";
-import scarfOfferingItems from "./items/scarfOffering";
+import peopleItems from "./data/mass/people";
+import liturgicalBooksItems from "./data/mass/liturgicalBooks";
+import vesselsItems from "./data/mass/vessels";
+import linenItems from "./data/mass/linen";
+import scarfOfferingItems from "./data/scarfOffering";
 
 interface MassChecklistProps {
   checkedValues: string[];

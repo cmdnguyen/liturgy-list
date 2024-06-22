@@ -8,12 +8,12 @@ import {
 import ChecklistGroup from "./checklistGroup";
 import { useLiturgyData } from "../../utils/liturgyColorHelper";
 
-import scarfOfferingItems from "./items/scarfOffering";
-import incenseItems from "./items/adoration/incense";
-import peopleItems from "./items/adoration/people";
-import vestmentItems from "./items/adoration/vestments";
-import vesselItems from "./items/adoration/vessel";
-import linenItems from "./items/adoration/linen"
+import scarfOfferingItems from "./data/scarfOffering";
+import incenseItems from "./data/adoration/incense";
+import peopleItems from "./data/adoration/people";
+import vestmentItems from "./data/adoration/vestments";
+import vesselItems from "./data/adoration/vessel";
+import linenItems from "./data/adoration/linen"
 
 interface AdorationChecklistProps {
   checkedValues: string[];

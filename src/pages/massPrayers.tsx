@@ -3,10 +3,9 @@ import React, { useState } from "react";
 import Hero from "../components/Hero";
 import MassImage from "../../public/mass_cap12021.jpg";
 import { Container, Heading, Switch, Flex, Text } from "@chakra-ui/react";
-import EnglishPrayers from "../components/prayers/EnglishPrayers";
-import VietnamesePrayers from "../components/prayers/VietnamesePrayers";
+import MassPrayers from "../components/prayers/massPrayers";
 
-export default function MassPrayers() {
+export default function MassPrayersPage() {
   const [isVietnamese, setIsVietnamese] = useState(false);
 
   const handleToggleLanguage = () => {
@@ -33,9 +32,10 @@ export default function MassPrayers() {
             </Flex>
           </Flex>
 
-          {isVietnamese ? <VietnamesePrayers /> : <EnglishPrayers />}
+          <MassPrayers isVietnamese={isVietnamese} />
         </Container>
       </Container>
     </>
   );
 }
+
